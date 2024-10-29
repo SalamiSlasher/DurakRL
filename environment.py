@@ -9,14 +9,16 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-trump = ''
 
-
-class Suit(enum.StrEnum):
+class Suit(enum.Enum):
     HEARTS = 'hearts'
     DIAMONDS = 'diamonds'
     CLUBS = 'clubs'
     SPADES = 'spades'
+    blank = ''
+
+
+trump: Suit = Suit.blank
 
 
 class Rank(enum.IntEnum):
@@ -59,7 +61,7 @@ def get_full_deck() -> list[Card]:
 class Player:
     def __init__(self, game: Game):
         self.game = game
-        self.cards = []
+        self.cards: list[Card] = []
 
     @property
     def card_amount(self) -> int:
@@ -79,23 +81,27 @@ class Player:
 
     def defend(self, attack_card: Card) -> Card | None:
         choices = self.get_possible_defend_moves(attack_card)
-        choices += [None]
         choice = random.choice(choices)
         return choice
 
-    def get_possible_defend_moves(self, attack_card: Card) -> list[Card]:
-        cards = []
+    def get_possible_defend_moves(self, attack_card: Card) -> list[Card | None]:
+        cards: list[Card | None] = []
         for card in self.cards:
             if card.can_beat(attack_card):
                 cards.append(card)
+        cards.append(None)
         return cards
 
-    def get_possible_attack_moves(self, desk: list[CardPair]) -> list[Card]:
+    def get_possible_attack_moves(self, desk: list[CardPair]) -> list[Card | None]:
         ranks_in_play = set()
         for card in desk:
             ranks_in_play.add(card.attack_card.rank)
-            ranks_in_play.add(card.defend_card.rank)
-        return [card for card in self.cards if card.rank in ranks_in_play]
+            if card.defend_card:
+                ranks_in_play.add(card.defend_card.rank)
+
+        cards: list[Card | None] = [card for card in self.cards if card.rank in ranks_in_play]
+        cards.append(None)
+        return cards
 
     def coattack(self, desk: list[CardPair]) -> Card | None:
         choices = self.get_possible_attack_moves(desk)
@@ -116,7 +122,6 @@ class Game:
         self.deck = get_full_deck()
         self.players: deque[Player] = deque()
         self.winners: list[Player] = []
-        self.trump: str | None = None
 
     def add_player(self, player: Player) -> None:
         self.players.append(player)
@@ -134,7 +139,7 @@ class Game:
                 card = self.deck.pop()
                 player.take_card(card)
 
-        if not trump:
+        if trump == Suit.blank:
             trump = self.deck[-1].suit
 
     def is_end_game(self) -> bool:
@@ -156,13 +161,15 @@ class Game:
         desk: list[CardPair] = []
 
         i = 0
-        attack_card = attacker.attack()
+        attack_card: Card | None = attacker.attack()
         desk.append(CardPair(attack_card, None))
 
         defend_card = defender.defend(attack_card)
         while defend_card:
 
             desk[i] = CardPair(attack_card, defend_card)
+            defender.cards.remove(defend_card)
+
             i += 1
             attack_card = attacker.coattack(desk)
             if attack_card is None:  # нечего подкинуть
@@ -176,13 +183,14 @@ class Game:
                     return None
             else:
                 attacker.cards.remove(attack_card)
-                desk[i].attack_card = attack_card
+                desk.append(CardPair(attack_card, None))
                 continue
 
         cards_to_take = []
         for pair in desk:
             cards_to_take.append(pair.attack_card)
-            cards_to_take.append(pair.defend_card)
+            if pair.defend_card:
+                cards_to_take.append(pair.defend_card)
 
         return cards_to_take
 
