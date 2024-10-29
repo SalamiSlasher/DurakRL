@@ -76,10 +76,13 @@ class Player:
         self.cards += cards
 
     def attack(self) -> Card:
+        if not self.cards:
+            raise RuntimeError
         card = random.choice(self.cards)
         return card
 
     def defend(self, attack_card: Card) -> Card | None:
+
         choices = self.get_possible_defend_moves(attack_card)
         choice = random.choice(choices)
         return choice
@@ -162,10 +165,16 @@ class Game:
 
         i = 0
         attack_card: Card | None = attacker.attack()
+        if attack_card is None:
+            return None
+
         desk.append(CardPair(attack_card, None))
 
-        defend_card = defender.defend(attack_card)
+        defend_card: Card | None = defender.defend(attack_card)
         while defend_card:
+
+            if defend_card is None:
+                break
 
             desk[i] = CardPair(attack_card, defend_card)
             defender.cards.remove(defend_card)
@@ -184,6 +193,7 @@ class Game:
             else:
                 attacker.cards.remove(attack_card)
                 desk.append(CardPair(attack_card, None))
+                defend_card: Card | None = defender.defend(attack_card)
                 continue
 
         cards_to_take = []
@@ -202,7 +212,13 @@ class Game:
             coattacker = self.get_coattacker()
 
             take_cards = self.move_loop(attacker, defender, coattacker)
+            logger.error(f'{attacker.card_amount=}')
+            logger.error(f'{defender.card_amount=}')
+            logger.error(f'{len(self.deck)}')
+            logger.error('=======================')
+            # pass
             defender.take_cards(take_cards)
+
 
             # take cards up to 6
             while attacker.card_amount < 6 and self.deck:
