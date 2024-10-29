@@ -11,14 +11,13 @@ logger = logging.getLogger(__name__)
 
 
 class Suit(enum.Enum):
-    HEARTS = 'hearts'
-    DIAMONDS = 'diamonds'
-    CLUBS = 'clubs'
-    SPADES = 'spades'
-    blank = ''
+    HEARTS = "hearts"
+    DIAMONDS = "diamonds"
+    CLUBS = "clubs"
+    SPADES = "spades"
 
 
-trump: Suit = Suit.blank
+trump: Suit | None = None
 
 
 class Rank(enum.IntEnum):
@@ -41,9 +40,6 @@ class Card:
     def __repr__(self) -> str:
         return f"{self.rank.name} of {self.suit.name}"
 
-    def __bool__(self) -> bool:
-        return True
-
     def can_beat(self, attack_card: Card) -> bool:
         if self.suit != trump:
             return self.suit == attack_card.suit and self.rank > attack_card.rank
@@ -59,12 +55,18 @@ def get_full_deck() -> list[Card]:
 
 
 class Player:
-    def __init__(self, game: Game):
+    def __init__(self, game: Game, name: str):
         self.game = game
+        self.name = name
         self.cards: list[Card] = []
+
+    def __str__(self):
+        return self.name
 
     @property
     def card_amount(self) -> int:
+        if len(self.cards) > 36:
+            raise RuntimeError('LOGIC')
         return len(self.cards)
 
     def take_card(self, card: Card) -> None:
@@ -82,10 +84,12 @@ class Player:
         return card
 
     def defend(self, attack_card: Card) -> Card | None:
-
         choices = self.get_possible_defend_moves(attack_card)
         choice = random.choice(choices)
         return choice
+
+    def remove_card(self, card: Card) -> None:
+        self.cards.remove(card)
 
     def get_possible_defend_moves(self, attack_card: Card) -> list[Card | None]:
         cards: list[Card | None] = []
@@ -102,13 +106,14 @@ class Player:
             if card.defend_card:
                 ranks_in_play.add(card.defend_card.rank)
 
-        cards: list[Card | None] = [card for card in self.cards if card.rank in ranks_in_play]
+        cards: list[Card | None] = [
+            card for card in self.cards if card.rank in ranks_in_play
+        ]
         cards.append(None)
         return cards
 
     def coattack(self, desk: list[CardPair]) -> Card | None:
         choices = self.get_possible_attack_moves(desk)
-        choices += [None]
         choice = random.choice(choices)
 
         return choice
@@ -142,7 +147,7 @@ class Game:
                 card = self.deck.pop()
                 player.take_card(card)
 
-        if trump == Suit.blank:
+        if trump is None:
             trump = self.deck[-1].suit
 
     def is_end_game(self) -> bool:
@@ -160,47 +165,50 @@ class Game:
         return None
 
     @staticmethod
-    def move_loop(attacker: Player, defender: Player, coattacker: Player | None) -> list[Card] | None:
+    def move_loop(
+        attacker: Player, defender: Player, coattacker: Player | None
+    ) -> list[Card] | None:
         desk: list[CardPair] = []
 
-        i = 0
-        attack_card: Card | None = attacker.attack()
-        if attack_card is None:
-            return None
+        attack_card = attacker.attack()
 
         desk.append(CardPair(attack_card, None))
 
-        defend_card: Card | None = defender.defend(attack_card)
-        while defend_card:
+        defend_card = defender.defend(attack_card)
 
-            if defend_card is None:
-                break
+        while defend_card is not None:
+            desk[-1] = CardPair(attack_card, defend_card)
+            try:
+                defender.remove_card(defend_card)
+            except ValueError:
+                print(f'{defender.cards=}')
+                print(f'{defend_card=}')
+                print(f'{str(trump)=}')
+                raise
 
-            desk[i] = CardPair(attack_card, defend_card)
-            defender.cards.remove(defend_card)
-
-            i += 1
             attack_card = attacker.coattack(desk)
+
             if attack_card is None:  # нечего подкинуть
                 if coattacker is not None:  # есть другие нападающие
                     attack_card = coattacker.coattack(desk)
-                    if attack_card is None:  # они не смогли подкинуть
-                        return None
-                    else:
-                        coattacker.cards.remove(attack_card)  # они смогли
-                else:
-                    return None
-            else:
-                attacker.cards.remove(attack_card)
-                desk.append(CardPair(attack_card, None))
-                defend_card: Card | None = defender.defend(attack_card)
-                continue
 
-        cards_to_take = []
-        for pair in desk:
-            cards_to_take.append(pair.attack_card)
-            if pair.defend_card:
-                cards_to_take.append(pair.defend_card)
+                    if attack_card is None:  # они не смогли подкинуть
+                        break
+
+                    coattacker.remove_card(attack_card)  # они смогли
+                    desk.append(CardPair(attack_card, None))
+                    defend_card = defender.defend(attack_card)
+                else:
+                    break
+
+            else:
+                attacker.remove_card(attack_card)
+                desk.append(CardPair(attack_card, None))
+                defend_card = defender.defend(attack_card)
+
+        cards_to_take = [pair.attack_card for pair in desk]
+
+        cards_to_take += [pair.defend_card for pair in desk if pair.defend_card]
 
         return cards_to_take
 
@@ -212,42 +220,42 @@ class Game:
             coattacker = self.get_coattacker()
 
             take_cards = self.move_loop(attacker, defender, coattacker)
-            logger.error(f'{attacker.card_amount=}')
-            logger.error(f'{defender.card_amount=}')
-            logger.error(f'{len(self.deck)}')
-            logger.error('=======================')
+            logger.error(f"{attacker.card_amount=}")
+            logger.error(f"{defender.card_amount=}")
+            logger.error(f"{len(self.deck)=}")
+            logger.error("=======================")
             # pass
             defender.take_cards(take_cards)
 
-
             # take cards up to 6
-            while attacker.card_amount < 6 and self.deck:
-                attacker.take_card(self.deck.pop())
-
-            while coattacker and coattacker.card_amount < 6 and self.deck:
-                coattacker.take_card(self.deck.pop())
-
-            while defender.card_amount < 6 and self.deck:
-                defender.take_card(self.deck.pop())
+            for player in self.players:
+                while player.card_amount < 6 and self.deck:
+                    player.take_card(self.deck.pop())
 
             # rotate players
             self.players.append(self.players.popleft())  # moving attacker
             if take_cards:
-                self.players.append(self.players.popleft())  # moving defender IF they took
+                self.players.append(
+                    self.players.popleft()
+                )  # moving defender IF they took
 
             # remove winners
-            for player in self.players:
+            for player in list(self.players):
                 if not player.card_amount:
                     self.winners.append(player)
                     self.players.remove(player)
 
 
-if __name__ == '__main__':
-    game = Game()
-    player1 = Player(game)
-    player2 = Player(game)
-    game.add_player(player1)
-    game.add_player(player2)
-    game.init_game()
-    game.game_loop()
-    print(game.winners)
+if __name__ == "__main__":
+    for i in range(100):
+        game = Game()
+        print(len(game.deck))
+        player1 = Player(game, "1")
+        player2 = Player(game, "2")
+        player3 = Player(game, "3")
+        game.add_player(player1)
+        game.add_player(player2)
+        game.add_player(player3)
+        game.init_game()
+        game.game_loop()
+        print(game.winners)
