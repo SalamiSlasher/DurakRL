@@ -111,12 +111,13 @@ class DurakGame:
         )
         turn_stack.append(turn_stack_item)
 
-        # Когда дефендер отбил на прошлом ходу
+        # Когда дефендер отбил
         if is_beaten_off:
             defend_card = defender.defend(turn_stack)
         # Когда дефендер не отбил в прошлом ходе и его топят...
         else:
             defend_card = void_card
+        turn_stack[-1].defender_card = defend_card
 
         is_beaten_off = defend_card != void_card  # void_card - не смог отбить
         log_msg(f'{attacker.name} ---> {defender.name}: {attack_card} ---> {defend_card}', sep='-' * 25)
