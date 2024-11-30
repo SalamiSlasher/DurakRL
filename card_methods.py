@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import itertools
 from enum import Enum, IntEnum
 from random import shuffle
@@ -8,7 +10,8 @@ class Suit(Enum):
     DIAMONDS = "diamonds"
     CLUBS = "clubs"
     SPADES = "spades"
-    VOID = 'void'
+    VOID = "void"
+
 
 class Rank(IntEnum):
     SIX = 6
@@ -21,6 +24,7 @@ class Rank(IntEnum):
     KING = 13
     ACE = 14
     VOID = 15
+
 
 class Card:
     def __init__(self, suit: Suit, rank: Rank) -> None:
@@ -47,7 +51,9 @@ def get_possible_movements(state: list[Card]) -> list[Card]:
     return []
 
 
-def possible_attack_cards(card_stack: list[Card], player_cards: list[Card]) -> list[Card]:
+def possible_attack_cards(
+    card_stack: list[Card], player_cards: list[Card]
+) -> list[Card]:
     # Собираем ранги всех карт на столе, исключая пустые карты
     table_ranks = set(card.rank for card in card_stack if not is_void_card(card))
     # Возвращаем карты из руки игрока, ранги которых есть на столе
