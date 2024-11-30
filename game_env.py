@@ -4,6 +4,8 @@ import random
 from gymnasium import Env
 from collections import deque
 
+from pycparser.c_ast import While
+
 from card_methods import Card, Suit, void_card, possible_attack_cards
 import card_methods
 
@@ -19,6 +21,8 @@ class DurakGame:
         self.players = deque(maxlen=6)
         self.deck: list[Card] = card_methods.get_full_deck()
         self.beat: list[Card] = []
+
+        self.winners = []
 
     def add_player(self, player: Player) -> None:
         self.players.append(player)
@@ -37,14 +41,42 @@ class DurakGame:
         # --------------INIT--------------
 
         while self.end_condition():
-            attacker = self.players[0]
-            defender = self.players[1]
-            co_attacker = None if len(self.players) == 2 else self.players[-1]
+            # --------------TABLE_LOOP--------------
+            attacker: Player = self.players[0]
+            defender: Player = self.players[1]
+            co_attacker: Player | None = None if len(self.players) == 2 else self.players[-1]
 
             turn_stack = []
-            is_beaten_off = self.attack_loop(
+            is_beaten_off: bool = self.attack_loop(
                 attacker, defender, co_attacker, turn_stack
             )
+            # --------------TABLE_LOOP--------------
+
+            # --------------GET_CARDS_FROM_DECK--------------
+            if not is_beaten_off:
+                to_take = CardLoopStackItem.flatten_table_stack(turn_stack)
+                defender.get_cards(to_take)
+
+            while len(self.deck) > 0 and any(len(player.cards) != 6 for player in self.players if player is not None):
+                to_take = self.deck.pop()
+                if len(attacker.cards) != 6:
+                    attacker.get_card(to_take)
+                elif co_attacker and len(co_attacker.cards) != 6:
+                    co_attacker.get_card(to_take)
+                elif len(defender.cards) != 6:
+                    defender.get_card(to_take)
+            # --------------GET_CARDS_FROM_DECK--------------
+
+            # --------------MAKE_ROTATION--------------
+            self.players.append(self.players.popleft())
+            # --------------MAKE_ROTATION--------------
+
+            # --------------DEFINE_WINNERS--------------
+            for player in self.players:
+                if len(player.cards) == 0:
+                    self.winners.append(player)
+                    self.players.remove(player)
+            # --------------DEFINE_WINNERS--------------
 
     def attack_loop(
         self,
@@ -53,7 +85,7 @@ class DurakGame:
         co_attacker,
         turn_stack: list[CardLoopStackItem],
         is_beaten_off=True,
-    ) -> None:
+    ) -> bool:
         if len(defender) - len(turn_stack) == 0:
             return is_beaten_off
 
@@ -118,12 +150,17 @@ class CardLoopStackItem:
 class Player:
     trump_suit: Suit = Suit.VOID
 
-    def __init__(self):
+    def __init__(self, name: str):
         # init start game
+        self.name = name
         self.cards: list[Card] = []
 
     def get_card(self, card) -> None:
         self.cards.append(card)
+
+    def get_cards(self, cards: list[Card]) -> None:
+        for card in cards:
+            self.get_card(card)
 
     def attack(self, table_stack: list[CardLoopStackItem]) -> Card:
         flatten_stack = CardLoopStackItem.flatten_table_stack(table_stack)
@@ -153,6 +190,6 @@ class Player:
 
 if __name__ == "__main__":
     game = DurakGame()
-    game.add_player(Player())
-    game.add_player(Player())
-    game.add_player(Player())
+    game.add_player(Player(name='ACTOR_1'))
+    game.add_player(Player(name='ACTOR_2'))
+    game.add_player(Player(name='ACTOR_3'))
