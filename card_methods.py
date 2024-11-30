@@ -6,10 +6,10 @@ from random import shuffle
 
 
 class Suit(Enum):
-    HEARTS = "hearts"
-    DIAMONDS = "diamonds"
-    CLUBS = "clubs"
-    SPADES = "spades"
+    HEARTS = "♡"
+    DIAMONDS = "♢"
+    CLUBS = "♣"
+    SPADES = "♠"
     VOID = "void"
 
     def __int__(self):
@@ -40,6 +40,19 @@ class Rank(IntEnum):
 
 
 class Card:
+    encoder = {
+        Rank.SIX: '6',
+        Rank.SEVEN: '7',
+        Rank.EIGHT: '8',
+        Rank.NINE: '9',
+        Rank.TEN: '10',
+        Rank.JACK : 'J',
+        Rank.QUEEN : 'Q',
+        Rank.KING : 'K',
+        Rank.ACE : 'A',
+        Rank.VOID : 'VOID',
+    }
+
     def __init__(self, suit: Suit, rank: Rank) -> None:
         self.suit = suit
         self.rank = rank
@@ -48,7 +61,7 @@ class Card:
         return self.suit == other.suit and self.rank == other.rank
 
     def __repr__(self) -> str:
-        return f"{self.rank.name} of {self.suit.name}"
+        return f"{self.encoder[self.rank]}{self.suit.value}"
 
     @property
     def id(self) -> int:

@@ -35,7 +35,8 @@ class DurakGame:
 
         for _ in range(6):
             for player in self.players:
-                player.get_cards(self.deck)
+                to_take = self.deck.pop()
+                player.get_card(to_take)
 
         self.trump: Suit = self.deck[0].suit
         Player.trump_suit = self.trump
@@ -93,6 +94,7 @@ class DurakGame:
         co_attacker,
         turn_stack: list[CardLoopStackItem],
         is_beaten_off=True,
+        turn=0
     ) -> bool:
         if len(defender) - len(turn_stack) == 0:
             return is_beaten_off
@@ -102,6 +104,7 @@ class DurakGame:
                 return self.attack_loop(co_attacker, defender, attacker, turn_stack)
             return is_beaten_off
 
+        turn = turn + 1
         # last card in turn_stack is card that must be beated by defender
         attack_card = attacker.attack(turn_stack)
         turn_stack_item = CardLoopStackItem(
@@ -118,8 +121,8 @@ class DurakGame:
         turn_stack[-1].defender_card = defend_card
 
         is_beaten_off = defend_card != void_card  # void_card - не смог отбить
-        log_msg(f'{attacker.name} ---> {defender.name}: {attack_card} ---> {defend_card}', sep='-' * 25)
-        self.attack_loop(attacker, defender, co_attacker, turn_stack, is_beaten_off)
+        log_msg(f'LOOP TURN #{turn}_{attacker.name} ---> {defender.name}: {attack_card} ---> {defend_card}', sep='-' * 25)
+        self.attack_loop(attacker, defender, co_attacker, turn_stack, is_beaten_off, turn)
 
     def end_condition(self) -> bool:
         return self.players == 1
@@ -214,6 +217,7 @@ class Player:
 
 
 if __name__ == "__main__":
+    random.seed(42)
     game = DurakGame()
     game.add_player(Player(name='ACTOR_1'))
     game.add_player(Player(name='ACTOR_2'))
