@@ -31,6 +31,9 @@ class Card:
         self.suit = suit
         self.rank = rank
 
+    def __eq__(self, other):
+        return self.suit == other.suit and self.rank == other.rank
+
     def __repr__(self) -> str:
         return f"{self.rank.name} of {self.suit.name}"
 
@@ -44,7 +47,7 @@ class Card:
         return Card.can_beat(attack_card, self, trump)
 
 def get_full_deck() -> list[Card]:
-    deck = [Card(suit, rank) for suit, rank in itertools.product(Suit, Rank)]
+    deck = [Card(suit, rank) for suit, rank in itertools.product(Suit, Rank) if not is_void_card(Card(suit, rank))]
     shuffle(deck)
     return deck
 
@@ -77,4 +80,4 @@ void_card = Card(Suit.VOID, Rank.VOID)
 
 
 def is_void_card(card: Card):
-    return void_card == card
+    return card.rank == Rank.VOID or card.suit == Suit.VOID

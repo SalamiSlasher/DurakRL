@@ -10,6 +10,9 @@ from card_methods import Card, Suit, void_card, possible_attack_cards
 import card_methods
 
 
+def log_msg(msg, sep='=' * 50):
+    print(sep + msg + sep)
+
 class DurakEnv(Env): ...
 
 
@@ -40,11 +43,16 @@ class DurakGame:
         Player.trump_suit = self.trump
         # --------------INIT--------------
 
-        while self.end_condition():
+        while not self.end_condition():
+            log_msg('START ATTACK LOOP')
             # --------------TABLE_LOOP--------------
+
             attacker: Player = self.players[0]
             defender: Player = self.players[1]
             co_attacker: Player | None = None if len(self.players) == 2 else self.players[-1]
+
+            for player in self.players:
+                print(player)
 
             turn_stack = []
             is_beaten_off: bool = self.attack_loop(
@@ -74,9 +82,11 @@ class DurakGame:
             # --------------DEFINE_WINNERS--------------
             for player in self.players:
                 if len(player.cards) == 0:
+                    print(f'PLAYER {player.name} wins!')
                     self.winners.append(player)
                     self.players.remove(player)
             # --------------DEFINE_WINNERS--------------
+            log_msg('END ATTACK LOOP')
 
     def attack_loop(
         self,
@@ -110,6 +120,7 @@ class DurakGame:
         turn_stack.append(turn_stack_item)
 
         is_beaten_off = defend_card != void_card  # void_card - не смог отбить
+        log_msg(f'{attacker.name} ---> {defender.name}: {attack_card} ---> {defend_card}', sep='-' * 25)
         self.attack_loop(attacker, defender, co_attacker, turn_stack, is_beaten_off)
 
     def end_condition(self) -> bool:
@@ -187,9 +198,13 @@ class Player:
             self.cards.remove(defend_card)
         return defend_card
 
+    def __str__(self):
+        return f'{self.name}: {self.cards}'
+
 
 if __name__ == "__main__":
     game = DurakGame()
     game.add_player(Player(name='ACTOR_1'))
     game.add_player(Player(name='ACTOR_2'))
     game.add_player(Player(name='ACTOR_3'))
+    game.start_game()
