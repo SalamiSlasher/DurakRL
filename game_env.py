@@ -4,8 +4,6 @@ import random
 from gymnasium import Env
 from collections import deque
 
-from pycparser.c_ast import While
-
 from card_methods import Card, Suit, void_card, possible_attack_cards
 import card_methods
 
@@ -140,7 +138,7 @@ class CardLoopStackItem:
         self.attacker_card = attacker_card
         self.attacker = attacker
 
-        self.defender_card: Card | void_card = void_card
+        self.defender_card: Card = void_card
         self.defender = defender
 
     def flatten(self):
@@ -159,6 +157,17 @@ class CardLoopStackItem:
                 tmp.append(defender_card)
 
         return tmp
+
+
+def is_possible_attack(card_in_hand: Card, desk: list[CardLoopStackItem]) -> bool:
+    ranks_in_play = set()
+    for card in desk:
+        ranks_in_play.add(card.attacker_card.rank)
+        if card.defend_card:
+            ranks_in_play.add(card.defend_card.rank)
+
+    return card_in_hand in ranks_in_play
+
 
 class Player:
     trump_suit: Suit = Suit.VOID
