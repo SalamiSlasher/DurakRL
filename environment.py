@@ -54,6 +54,33 @@ def get_full_deck() -> list[Card]:
     return [Card(suit, rank) for suit, rank in itertools.product(Suit, Rank)]
 
 
+def get_possible_attack_moves(
+    cards_in_hand: list[Card], desk: list[CardPair]
+) -> list[Card | None]:
+    ranks_in_play = set()
+    for card in desk:
+        ranks_in_play.add(card.attack_card.rank)
+        if card.defend_card:
+            ranks_in_play.add(card.defend_card.rank)
+
+    cards: list[Card | None] = [
+        card for card in cards_in_hand if card.rank in ranks_in_play
+    ]
+    cards.append(None)
+    return cards
+
+
+def get_possible_defend_moves(
+    cards_in_hand: list[Card], attack_card: Card
+) -> list[Card | None]:
+    cards: list[Card | None] = []
+    for card in cards_in_hand:
+        if card.can_beat(attack_card):
+            cards.append(card)
+    cards.append(None)
+    return cards
+
+
 class Player:
     def __init__(self, game: Game, name: str):
         self.game = game
@@ -66,7 +93,7 @@ class Player:
     @property
     def card_amount(self) -> int:
         if len(self.cards) > 36:
-            raise RuntimeError('LOGIC')
+            raise RuntimeError("LOGIC")
         return len(self.cards)
 
     def take_card(self, card: Card) -> None:
@@ -84,36 +111,15 @@ class Player:
         return card
 
     def defend(self, attack_card: Card) -> Card | None:
-        choices = self.get_possible_defend_moves(attack_card)
+        choices = get_possible_defend_moves(self.cards, attack_card)
         choice = random.choice(choices)
         return choice
 
     def remove_card(self, card: Card) -> None:
         self.cards.remove(card)
 
-    def get_possible_defend_moves(self, attack_card: Card) -> list[Card | None]:
-        cards: list[Card | None] = []
-        for card in self.cards:
-            if card.can_beat(attack_card):
-                cards.append(card)
-        cards.append(None)
-        return cards
-
-    def get_possible_attack_moves(self, desk: list[CardPair]) -> list[Card | None]:
-        ranks_in_play = set()
-        for card in desk:
-            ranks_in_play.add(card.attack_card.rank)
-            if card.defend_card:
-                ranks_in_play.add(card.defend_card.rank)
-
-        cards: list[Card | None] = [
-            card for card in self.cards if card.rank in ranks_in_play
-        ]
-        cards.append(None)
-        return cards
-
     def coattack(self, desk: list[CardPair]) -> Card | None:
-        choices = self.get_possible_attack_moves(desk)
+        choices = get_possible_attack_moves(self.cards, desk)
         choice = random.choice(choices)
 
         return choice
@@ -170,7 +176,7 @@ class Game:
     ) -> list[Card] | None:
         desk: list[CardPair] = []
 
-        attack_card = attacker.attack()
+        attack_card: Card | None = attacker.attack()
 
         desk.append(CardPair(attack_card, None))
 
@@ -181,9 +187,9 @@ class Game:
             try:
                 defender.remove_card(defend_card)
             except ValueError:
-                print(f'{defender.cards=}')
-                print(f'{defend_card=}')
-                print(f'{str(trump)=}')
+                print(f"{defender.cards=}")
+                print(f"{defend_card=}")
+                print(f"{str(trump)=}")
                 raise
 
             attack_card = attacker.coattack(desk)

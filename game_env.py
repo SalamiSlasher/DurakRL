@@ -1,29 +1,30 @@
 from __future__ import annotations
 import random
 
-from gymnasium import Env, spaces
+from gymnasium import Env
+from gymnasium import spaces
 from collections import deque
 
 from card_methods import Card, Suit, void_card
 import card_methods
 
-class DurakEnv(Env):
-    ...
+
+class DurakEnv(Env): ...
 
 
 class DurakGame:
-    def __init__(self):
+    def __init__(self) -> None:
         # self.player_count = player_count
-        #self.players = deque(Player() for i in range(player_count))
+        # self.players = deque(Player() for i in range(player_count))
         self.trump: Suit | None = None
         self.players = deque(maxlen=6)
         self.deck: list[Card] = card_methods.get_full_deck()
         self.beat: list[Card] = []
 
-    def add_player(self, player: Player):
+    def add_player(self, player: Player) -> None:
         self.players.append(player)
 
-    def start_game(self):
+    def start_game(self) -> None:
         # --------------INIT--------------
         if len(self.players) < 2:
             raise AssertionError("Not enough players")
@@ -41,9 +42,18 @@ class DurakGame:
             co_attacker = None if len(self.players) == 2 else self.players[-1]
 
             turn_stack = []
-            is_beaten_off = self.attack_loop(attacker, defender, co_attacker, turn_stack)
+            is_beaten_off = self.attack_loop(
+                attacker, defender, co_attacker, turn_stack
+            )
 
-    def attack_loop(self, attacker, defender, co_attacker, turn_stack: list[CardLoopStackItem], is_beaten_off=True):
+    def attack_loop(
+        self,
+        attacker,
+        defender,
+        co_attacker,
+        turn_stack: list[CardLoopStackItem],
+        is_beaten_off=True,
+    ) -> None:
         if len(defender) - len(turn_stack) == 0:
             return is_beaten_off
 
@@ -62,21 +72,29 @@ class DurakGame:
         else:
             defend_card = void_card
 
-        turn_stack_item = CardLoopStackItem(attack_card, attacker, defend_card, defender)
+        turn_stack_item = CardLoopStackItem(
+            attack_card, attacker, defend_card, defender
+        )
         turn_stack.append(turn_stack_item)
 
         is_beaten_off = defend_card != void_card  # void_card - не смог отбить
         self.attack_loop(attacker, defender, co_attacker, turn_stack, is_beaten_off)
 
-    def end_condition(self):
+    def end_condition(self) -> bool:
         return self.players == 1
 
-    def give_card(self, player: Player):
+    def give_card(self, player: Player) -> None:
         player.get_card(self.deck.pop())
 
 
 class CardLoopStackItem:
-    def __init__(self, attacker_card: Card, attacker: Player, defender_card: Card, defender: Player):
+    def __init__(
+        self,
+        attacker_card: Card,
+        attacker: Player,
+        defender_card: Card,
+        defender: Player,
+    ):
         self.attacker_card = attacker_card
         self.attacker = attacker
 
@@ -107,7 +125,8 @@ class Player:
         to_defend = state[-1]
         return random.choice(self.cards)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     game = DurakGame()
     game.add_player(Player())
     game.add_player(Player())
