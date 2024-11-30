@@ -106,6 +106,10 @@ class DurakGame:
 
         # last card in turn_stack is card that must be beated by defender
         attack_card = attacker.attack(turn_stack)
+        turn_stack_item = CardLoopStackItem(
+            attack_card, attacker, defender
+        )
+        turn_stack.append(turn_stack_item)
 
         # Когда дефендер отбил на прошлом ходу
         if is_beaten_off:
@@ -113,11 +117,6 @@ class DurakGame:
         # Когда дефендер не отбил в прошлом ходе и его топят...
         else:
             defend_card = void_card
-
-        turn_stack_item = CardLoopStackItem(
-            attack_card, attacker, defend_card, defender
-        )
-        turn_stack.append(turn_stack_item)
 
         is_beaten_off = defend_card != void_card  # void_card - не смог отбить
         log_msg(f'{attacker.name} ---> {defender.name}: {attack_card} ---> {defend_card}', sep='-' * 25)
@@ -135,17 +134,19 @@ class CardLoopStackItem:
         self,
         attacker_card: Card,
         attacker: Player,
-        defender_card: Card,
         defender: Player,
     ):
         self.attacker_card = attacker_card
         self.attacker = attacker
 
-        self.defender_card: Card = defender_card
+        self.defender_card: Card | void_card = void_card
         self.defender = defender
 
     def flatten(self):
         return [self.attacker_card, self.defender_card]
+
+    def set_defend_card(self, defend_card: Card):
+        self.defender_card = defend_card
 
     @staticmethod
     def flatten_table_stack(table_stack: list[CardLoopStackItem]):

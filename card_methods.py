@@ -37,6 +37,14 @@ class Card:
     def __repr__(self) -> str:
         return f"{self.rank.name} of {self.suit.name}"
 
+    @property
+    def id(self) -> int:
+        """
+        Возвращает уникальный идентификатор карты.
+        Идентификатор - это целое число, которое зависит от масти и достоинства.
+        """
+        return (self.rank.value - 6) + (self.suit.value * 9)
+
     @staticmethod
     def can_beat(attack_card: Card, defend_card: Card, trump: Suit) -> bool:
         if attack_card.suit == defend_card.suit:
