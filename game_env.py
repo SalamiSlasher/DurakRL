@@ -79,13 +79,20 @@ class DurakGame:
             # --------------MAKE_ROTATION--------------
 
             # --------------DEFINE_WINNERS--------------
+            winners_tmp = []
             for player in self.players:
                 if len(player.cards) == 0:
                     print(f'PLAYER {player.name} wins!')
                     self.winners.append(player)
-                    self.players.remove(player)
+                    winners_tmp.append(player)
+
+            for winner in winners_tmp:
+                self.players.remove(winner)
             # --------------DEFINE_WINNERS--------------
-            log_msg('END ATTACK LOOP')
+            log_msg(f'END ATTACK LOOP with is_beaten: {is_beaten_off} and deck len: {len(self.deck)}')
+            pass
+
+        print(f"GAME ENDS WITH WINNERS: {self.winners}\nand loser: {self.players}")
 
     def attack_loop(
         self,
@@ -120,8 +127,11 @@ class DurakGame:
             defend_card = void_card
         turn_stack[-1].defender_card = defend_card
 
-        is_beaten_off = defend_card != void_card  # void_card - не смог отбить
-        log_msg(f'LOOP TURN #{turn}_{attacker.name} ---> {defender.name}: {attack_card} ---> {defend_card}', sep='-' * 25)
+        is_beaten_off = not card_methods.is_void_card(defend_card)  # void_card - не смог отбить
+        log_msg(f'LOOP TURN #{turn}: |{attacker.name} ---> {defender.name}| {attack_card} ---> {defend_card}', sep='-' * 25)
+        print(attacker)
+        print(defender)
+        print(*turn_stack)
         self.attack_loop(attacker, defender, co_attacker, turn_stack, is_beaten_off, turn)
 
     def end_condition(self) -> bool:
@@ -156,10 +166,13 @@ class CardLoopStackItem:
         for stack_item in table_stack:
             attack_card, defender_card = stack_item.flatten()
             tmp.append(attack_card)
-            if defender_card != void_card:
+            if not card_methods.is_void_card(defender_card):
                 tmp.append(defender_card)
 
         return tmp
+
+    def __str__(self):
+        return f'({self.attacker_card}, {self.defender_card})'
 
 
 def is_possible_attack(card_in_hand: Card, desk: list[CardLoopStackItem]) -> bool:
@@ -191,6 +204,7 @@ class Player:
         flatten_stack = CardLoopStackItem.flatten_table_stack(table_stack)
         action_cards_list = card_methods.possible_attack_cards(flatten_stack, self.cards)
         attack_card = random.choice(action_cards_list)
+        self.cards.remove(attack_card)
         return attack_card
 
     def want_to_attack(self, table_stack):
@@ -208,7 +222,7 @@ class Player:
         action_cards_list: list[Card] = card_methods.possible_defend_cards(attack_card, self.cards, Player.trump_suit)
 
         defend_card = random.choice(action_cards_list)
-        if defend_card != void_card:
+        if not card_methods.is_void_card(defend_card):
             self.cards.remove(defend_card)
         return defend_card
 
