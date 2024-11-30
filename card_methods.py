@@ -56,6 +56,9 @@ def get_possible_movements(state: list[Card]) -> list[Card]:
 def possible_attack_cards(
     card_stack: list[Card], player_cards: list[Card]
 ) -> list[Card]:
+    if len(card_stack) == 0:
+        return player_cards
+
     # Собираем ранги всех карт на столе, исключая пустые карты
     table_ranks = set(card.rank for card in card_stack if not is_void_card(card))
     # Возвращаем карты из руки игрока, ранги которых есть на столе

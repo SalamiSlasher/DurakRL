@@ -127,7 +127,7 @@ class Player:
 
     def attack(self, table_stack: list[CardLoopStackItem]) -> Card:
         flatten_stack = CardLoopStackItem.flatten_table_stack(table_stack)
-        action_cards_list = possible_attack_cards(flatten_stack, self.cards)
+        action_cards_list = card_methods.possible_attack_cards(flatten_stack, self.cards)
         attack_card = random.choice(action_cards_list)
         return attack_card
 
@@ -135,11 +135,13 @@ class Player:
         if len(table_stack) == 0:
             return True
 
+        flatten_stack = CardLoopStackItem.flatten_table_stack(table_stack)
+        return len(card_methods.possible_attack_cards(flatten_stack, self.cards)) > 0
+
     def __len__(self):
         return len(self.cards)
 
     def defend(self, table_stack: list[CardLoopStackItem]) -> Card:
-        # True <-> player beat an attack card
         attack_card = table_stack[-1].attacker_card
         action_cards_list: list[Card] = card_methods.possible_defend_cards(attack_card, self.cards, Player.trump_suit)
 
