@@ -3,6 +3,7 @@ from __future__ import annotations
 import itertools
 from enum import Enum, IntEnum
 from random import shuffle
+from typing import List, Tuple
 
 
 class Suit(Enum):
@@ -14,19 +15,18 @@ class Suit(Enum):
 
     def __int__(self):
         if self == Suit.VOID:
-            return 0
+            return -1
         elif self == Suit.HEARTS:
-            return 1
+            return 0
         elif self == Suit.DIAMONDS:
-            return 2
+            return 1
         elif self == Suit.CLUBS:
-            return 3
+            return 2
         elif self == Suit.SPADES:
-            return 4
+            return 3
 
     def __float__(self) -> float:
-        return float(self.__int__())
-
+        return float(int(self))
 
 
 class Rank(IntEnum):
@@ -44,16 +44,16 @@ class Rank(IntEnum):
 
 class Card:
     encoder = {
-        Rank.SIX: '6',
-        Rank.SEVEN: '7',
-        Rank.EIGHT: '8',
-        Rank.NINE: '9',
-        Rank.TEN: '10',
-        Rank.JACK : 'J',
-        Rank.QUEEN : 'Q',
-        Rank.KING : 'K',
-        Rank.ACE : 'A',
-        Rank.VOID : 'VOID',
+        Rank.SIX: "6",
+        Rank.SEVEN: "7",
+        Rank.EIGHT: "8",
+        Rank.NINE: "9",
+        Rank.TEN: "10",
+        Rank.JACK: "J",
+        Rank.QUEEN: "Q",
+        Rank.KING: "K",
+        Rank.ACE: "A",
+        Rank.VOID: "VOID",
     }
 
     def __init__(self, suit: Suit, rank: Rank) -> None:
@@ -66,13 +66,18 @@ class Card:
     def __repr__(self) -> str:
         return f"{self.encoder[self.rank]}{self.suit.value}"
 
+    def __hash__(self) -> int:
+        return hash((self.suit, self.rank))
+
     @property
     def id(self) -> int:
         """
         Возвращает уникальный идентификатор карты.
         Идентификатор - это целое число, которое зависит от масти и достоинства.
         """
-        return (self.rank.value - 6) + (int(self.suit.value) * 9)
+        if is_void_card(self):
+            return 36
+        return (self.rank.value - 6) + (int(self.suit) * 9)
 
     @staticmethod
     def can_beat(attack_card: Card, defend_card: Card, trump: Suit) -> bool:
@@ -83,14 +88,26 @@ class Card:
     def can_this_beat(self, attack_card: Card, trump: Suit) -> bool:
         return Card.can_beat(attack_card, self, trump)
 
+
+void_card = Card(Suit.VOID, Rank.VOID)
+
+
+def is_void_card(card: Card):
+    return card.rank == Rank.VOID or card.suit == Suit.VOID
+
+
 def get_full_deck() -> list[Card]:
-    deck = [Card(suit, rank) for suit, rank in itertools.product(Suit, Rank) if not is_void_card(Card(suit, rank))]
+    deck = [
+        Card(suit, rank)
+        for suit, rank in itertools.product(Suit, Rank)
+        if not is_void_card(Card(suit, rank))
+    ]
     shuffle(deck)
     return deck
 
 
-def get_possible_movements(state: list[Card]) -> list[Card]:
-    return []
+def generate_full_table_states() -> list[tuple[Card, Card]]:
+    return list(itertools.product(get_full_deck(), get_full_deck() + [void_card]))
 
 
 def possible_attack_cards(
@@ -106,15 +123,31 @@ def possible_attack_cards(
     return possible_cards
 
 
-def possible_defend_cards(attack_card: Card, player_cards: list[Card], trump: Suit) -> list[Card]:
+def possible_defend_cards(
+    attack_card: Card, player_cards: list[Card], trump: Suit
+) -> list[Card]:
     # Фильтруем карты игрока, которые могут побить атакующую карту
-    defend_cards = [card for card in player_cards if Card.can_beat(attack_card, card, trump)]
+    defend_cards = [
+        card for card in player_cards if Card.can_beat(attack_card, card, trump)
+    ]
     defend_cards.append(void_card)
     return defend_cards
 
 
-void_card = Card(Suit.VOID, Rank.VOID)
+full_table_states = generate_full_table_states()
+mapping = {}
+for i in range(len(full_table_states)):
+    mapping[full_table_states[i]] = i
 
 
-def is_void_card(card: Card):
-    return card.rank == Rank.VOID or card.suit == Suit.VOID
+if __name__ == "__main__":
+    deck = get_full_deck()
+    dset = set()
+    for d in deck:
+        if d.id > 35:
+            print(d, d.id, "HERE")
+
+        print(d, d.id)
+        dset.add(d.id)
+
+    print(len(dset))
