@@ -34,12 +34,14 @@ class Card:
     def __repr__(self) -> str:
         return f"{self.rank.name} of {self.suit.name}"
 
+    @staticmethod
+    def can_beat(attack_card: Card, defend_card: Card, trump: Suit) -> bool:
+        if attack_card.suit == defend_card.suit:
+            return defend_card.rank > attack_card.rank
+        return defend_card.suit == trump and attack_card.suit != trump
 
-def can_beat(attack_card: Card, defend_card: Card, trump: Suit) -> bool:
-    if attack_card.suit == defend_card.suit:
-        return defend_card.rank > attack_card.rank
-    return defend_card.suit == trump
-
+    def can_this_beat(self, attack_card: Card, trump: Suit) -> bool:
+        return Card.can_beat(attack_card, self, trump)
 
 def get_full_deck() -> list[Card]:
     deck = [Card(suit, rank) for suit, rank in itertools.product(Suit, Rank)]
@@ -59,6 +61,13 @@ def possible_attack_cards(
     # Возвращаем карты из руки игрока, ранги которых есть на столе
     possible_cards = [card for card in player_cards if card.rank in table_ranks]
     return possible_cards
+
+
+def possible_defend_cards(attack_card: Card, player_cards: list[Card], trump: Suit) -> list[Card]:
+    # Фильтруем карты игрока, которые могут побить атакующую карту
+    defend_cards = [card for card in player_cards if Card.can_beat(attack_card, card, trump)]
+    defend_cards.append(void_card)
+    return defend_cards
 
 
 void_card = Card(Suit.VOID, Rank.VOID)

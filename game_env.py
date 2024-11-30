@@ -2,10 +2,9 @@ from __future__ import annotations
 import random
 
 from gymnasium import Env
-from gymnasium import spaces
 from collections import deque
 
-from card_methods import Card, Suit, void_card
+from card_methods import Card, Suit, void_card, possible_attack_cards
 import card_methods
 
 
@@ -34,6 +33,7 @@ class DurakGame:
                 player.get_cards(self.deck)
 
         self.trump: Suit = self.deck[0].suit
+        Player.trump_suit = self.trump
         # --------------INIT--------------
 
         while self.end_condition():
@@ -101,8 +101,23 @@ class CardLoopStackItem:
         self.defender_card: Card = defender_card
         self.defender = defender
 
+    def flatten(self):
+        return [self.attacker_card, self.defender_card]
+
+    @staticmethod
+    def flatten_table_stack(table_stack: list[CardLoopStackItem]):
+        tmp = []
+        for stack_item in table_stack:
+            attack_card, defender_card = stack_item.flatten()
+            tmp.append(attack_card)
+            if defender_card != void_card:
+                tmp.append(defender_card)
+
+        return tmp
 
 class Player:
+    trump_suit: Suit = Suit.VOID
+
     def __init__(self):
         # init start game
         self.cards: list[Card] = []
@@ -110,20 +125,28 @@ class Player:
     def get_card(self, card) -> None:
         self.cards.append(card)
 
-    def attack(self, state) -> Card:
-        return random.choice(self.cards)
+    def attack(self, table_stack: list[CardLoopStackItem]) -> Card:
+        flatten_stack = CardLoopStackItem.flatten_table_stack(table_stack)
+        action_cards_list = possible_attack_cards(flatten_stack, self.cards)
+        attack_card = random.choice(action_cards_list)
+        return attack_card
 
-    def want_to_attack(self, state):
-        if len(state) == 0:
+    def want_to_attack(self, table_stack):
+        if len(table_stack) == 0:
             return True
 
     def __len__(self):
         return len(self.cards)
 
-    def defend(self, state) -> Card | None:
+    def defend(self, table_stack: list[CardLoopStackItem]) -> Card:
         # True <-> player beat an attack card
-        to_defend = state[-1]
-        return random.choice(self.cards)
+        attack_card = table_stack[-1].attacker_card
+        action_cards_list: list[Card] = card_methods.possible_defend_cards(attack_card, self.cards, Player.trump_suit)
+
+        defend_card = random.choice(action_cards_list)
+        if defend_card != void_card:
+            self.cards.remove(defend_card)
+        return defend_card
 
 
 if __name__ == "__main__":
