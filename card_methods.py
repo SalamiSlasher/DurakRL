@@ -12,6 +12,19 @@ class Suit(Enum):
     SPADES = "spades"
     VOID = "void"
 
+    def __int__(self):
+        if self == Suit.VOID:
+            return 0
+        elif self == Suit.HEARTS:
+            return 1
+        elif self == Suit.DIAMONDS:
+            return 2
+        elif self == Suit.CLUBS:
+            return 3
+        elif self == Suit.SPADES:
+            return 4
+
+
 
 class Rank(IntEnum):
     SIX = 6
@@ -43,7 +56,7 @@ class Card:
         Возвращает уникальный идентификатор карты.
         Идентификатор - это целое число, которое зависит от масти и достоинства.
         """
-        return (self.rank.value - 6) + (self.suit.value * 9)
+        return (self.rank.value - 6) + (int(self.suit.value) * 9)
 
     @staticmethod
     def can_beat(attack_card: Card, defend_card: Card, trump: Suit) -> bool:
