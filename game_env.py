@@ -1,15 +1,19 @@
 from __future__ import annotations
-import random
 
-from gymnasium import Env
+import random
 from collections import deque
 
-from card_methods import Card, Suit, void_card, possible_attack_cards
-import card_methods
+from gymnasium import Env
 
+import card_methods
+from card_methods import Card, Suit, void_card
+
+
+DEBUG = True
 
 def log_msg(msg, sep='=' * 50):
-    print(sep + msg + sep)
+    if DEBUG:
+        print(sep + str(msg) + sep)
 
 class DurakEnv(Env): ...
 
@@ -51,11 +55,12 @@ class DurakGame:
             co_attacker: Player | None = None if len(self.players) == 2 else self.players[-1]
 
             for player in self.players:
-                print(player)
+                if DEBUG:
+                    log_msg(player, '')
 
             turn_stack = []
             is_beaten_off: bool = self.attack_loop(
-                attacker, defender, co_attacker, turn_stack
+                attacker, defender, co_attacker, turn_stack, True, 0
             )
             # --------------TABLE_LOOP--------------
 
@@ -64,7 +69,7 @@ class DurakGame:
                 to_take = CardLoopStackItem.flatten_table_stack(turn_stack)
                 defender.get_cards(to_take)
 
-            while len(self.deck) > 0 and any(len(player.cards) != 6 for player in self.players if player is not None):
+            while len(self.deck) > 0 and any(len(player.cards) < 6 for player in self.players if player is not None):
                 to_take = self.deck.pop()
                 if len(attacker.cards) != 6:
                     attacker.get_card(to_take)
@@ -72,6 +77,7 @@ class DurakGame:
                     co_attacker.get_card(to_take)
                 elif len(defender.cards) != 6:
                     defender.get_card(to_take)
+                pass
             # --------------GET_CARDS_FROM_DECK--------------
 
             # --------------MAKE_ROTATION--------------
@@ -82,7 +88,7 @@ class DurakGame:
             winners_tmp = []
             for player in self.players:
                 if len(player.cards) == 0:
-                    print(f'PLAYER {player.name} wins!')
+                    log_msg(f'PLAYER {player.name} wins!', '')
                     self.winners.append(player)
                     winners_tmp.append(player)
 
@@ -100,15 +106,15 @@ class DurakGame:
         defender,
         co_attacker,
         turn_stack: list[CardLoopStackItem],
-        is_beaten_off=True,
-        turn=0
+        is_beaten_off,
+        turn
     ) -> bool:
         if len(defender) - len(turn_stack) == 0:
             return is_beaten_off
 
         if not attacker.want_to_attack(turn_stack):
             if co_attacker and co_attacker.want_to_attack(turn_stack):
-                return self.attack_loop(co_attacker, defender, attacker, turn_stack)
+                return self.attack_loop(co_attacker, defender, attacker, turn_stack, is_beaten_off, turn)
             return is_beaten_off
 
         turn = turn + 1
@@ -129,13 +135,14 @@ class DurakGame:
 
         is_beaten_off = not card_methods.is_void_card(defend_card)  # void_card - не смог отбить
         log_msg(f'LOOP TURN #{turn}: |{attacker.name} ---> {defender.name}| {attack_card} ---> {defend_card}', sep='-' * 25)
-        print(attacker)
-        print(defender)
-        print(*turn_stack)
-        self.attack_loop(attacker, defender, co_attacker, turn_stack, is_beaten_off, turn)
+        log_msg(attacker, '')
+        log_msg(co_attacker, '')
+        log_msg(defender, '')
+        log_msg(turn_stack, '')
+        return self.attack_loop(attacker, defender, co_attacker, turn_stack, is_beaten_off, turn)
 
     def end_condition(self) -> bool:
-        return self.players == 1
+        return len(self.players) <= 1
 
     def give_card(self, player: Player) -> None:
         player.get_card(self.deck.pop())
@@ -179,8 +186,8 @@ def is_possible_attack(card_in_hand: Card, desk: list[CardLoopStackItem]) -> boo
     ranks_in_play = set()
     for card in desk:
         ranks_in_play.add(card.attacker_card.rank)
-        if card.defend_card:
-            ranks_in_play.add(card.defend_card.rank)
+        if card.defender_card:
+            ranks_in_play.add(card.defender_card.rank)
 
     return card_in_hand in ranks_in_play
 
@@ -229,11 +236,23 @@ class Player:
     def __str__(self):
         return f'{self.name}: {self.cards}'
 
+    def __repr__(self):
+        return str(self)
+
 
 if __name__ == "__main__":
-    random.seed(42)
-    game = DurakGame()
-    game.add_player(Player(name='ACTOR_1'))
-    game.add_player(Player(name='ACTOR_2'))
-    game.add_player(Player(name='ACTOR_3'))
-    game.start_game()
+    DEBUG = False
+    for i in range(1):
+        random.seed(i)
+        try:
+            game = DurakGame()
+            game.add_player(Player(name='ACTOR_1'))
+            game.add_player(Player(name='ACTOR_2'))
+            game.add_player(Player(name='ACTOR_3'))
+            game.start_game()
+        except IndexError:
+            print(f'failed seed:= {i}')
+            raise
+
+        assert not game.players or len(game.players[0]) % 2 == 0, f'failed seed:= {i}'
+        pass

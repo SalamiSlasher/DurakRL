@@ -24,6 +24,9 @@ class Suit(Enum):
         elif self == Suit.SPADES:
             return 4
 
+    def __float__(self) -> float:
+        return float(self.__int__())
+
 
 
 class Rank(IntEnum):
