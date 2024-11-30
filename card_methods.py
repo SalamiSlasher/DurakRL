@@ -28,6 +28,19 @@ class Suit(Enum):
     def __float__(self) -> float:
         return float(int(self))
 
+    @classmethod
+    def from_int(cls, integer: int) -> Suit:
+        if integer == -1:
+            return Suit.VOID
+        elif integer == 0:
+            return Suit.HEARTS
+        elif integer == 1:
+            return Suit.DIAMONDS
+        elif integer == 2:
+            return Suit.CLUBS
+        elif integer == 3:
+            return Suit.SPADES
+
 
 class Rank(IntEnum):
     SIX = 6
@@ -78,6 +91,22 @@ class Card:
         if is_void_card(self):
             return 36
         return (self.rank.value - 6) + (int(self.suit) * 9)
+
+    @classmethod
+    def from_id(cls, card_id: int) -> Card:
+        if card_id == 36:
+            return void_card
+
+        suit = card_id // 9  # Integer division to get the suit
+        rank_value = (
+            card_id % 9
+        ) + 6  # Get the rank by using the remainder and adding 6
+
+        # Assuming `Rank` and `Suit` are classes or enums:
+        rank = Rank(rank_value)
+        suit = Suit.from_int(suit)
+
+        return cls(rank=rank, suit=suit)
 
     @staticmethod
     def can_beat(attack_card: Card, defend_card: Card, trump: Suit) -> bool:
@@ -135,7 +164,7 @@ def possible_defend_cards(
 
 
 full_table_states = generate_full_table_states()
-mapping = {}
+mapping: dict[tuple[Card, Card], int] = {}
 for i in range(len(full_table_states)):
     mapping[full_table_states[i]] = i
 
