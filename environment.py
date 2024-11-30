@@ -54,6 +54,16 @@ def get_full_deck() -> list[Card]:
     return [Card(suit, rank) for suit, rank in itertools.product(Suit, Rank)]
 
 
+def is_possible_attack(card_in_hand: Card, desk: list[CardPair]) -> bool:
+    ranks_in_play = set()
+    for card in desk:
+        ranks_in_play.add(card.attack_card.rank)
+        if card.defend_card:
+            ranks_in_play.add(card.defend_card.rank)
+
+    return card_in_hand in ranks_in_play
+
+
 def get_possible_attack_moves(
     cards_in_hand: list[Card], desk: list[CardPair]
 ) -> list[Card | None]:

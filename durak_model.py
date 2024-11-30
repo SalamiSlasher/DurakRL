@@ -16,7 +16,13 @@ import torch.optim as optim
 import torch.nn.functional as F
 
 
-from environment import Card
+from environment import (
+    Card,
+    get_possible_attack_moves,
+    get_possible_defend_moves,
+    CardPair,
+    is_possible_attack,
+)
 
 env = gym.make("CartPole-v1")
 
@@ -35,10 +41,10 @@ device = torch.device(
 class GameState:
     def __init__(
         self,
-        hand: set[Card],
-        table: set[Card],
-        discard_pile: set[Card],
-        seen_opponent_cards: set[Card],
+        hand: list[Card],
+        table: list[CardPair],
+        discard_pile: list[Card],
+        seen_opponent_cards: list[Card],
         is_attacker: bool,
     ) -> None:
         self.hand = hand
@@ -85,15 +91,37 @@ def get_action_mask(state: GameState) -> list[int]:
 
     if state.is_attacker:
         mask[1] = 0  # cannot say Take
+
+        if len(state.table) == 0:  # no cards in play
+            return mask
+
+        for i, card in enumerate(state.hand):
+            if not is_possible_attack(card, state.table):
+                mask[i + 2] = 0
+
     else:
         mask[0] = 0  # cannot say Bita
 
-    if not state.is_attacker and len(state.table) > 0 and len(state.hand) == 0:
-        mask = [0] * len(mask)
-        mask[1] = 1  # always say Take
+        if not state.table:
+            raise AssertionError(
+                "Unreachable: cannot defend when there are no cards in play"
+            )
 
-    for i, card in enumerate(state.hand):
-        if not possible_atack_cards(card, state.table):
-            mask[i + 2] = 0  # Карты начинаются с индекса 2
+        for i, card in enumerate(state.hand):
+            attack_cards = []
+            for attack_card, defend_card in state.table:
+                if defend_card is None:
+                    attack_cards.append(attack_card)
+
+            if len(attack_cards) > 1:
+                raise AssertionError("Unreachable: more than one attack_card")
+
+            if len(attack_cards) < 1:
+                raise AssertionError(
+                    "Unreachable: cannot defend when there are no cards in play"
+                )
+
+            if not card.can_beat(attack_cards[0]):
+                mask[i + 2] = 0  # do not choose from these cards
 
     return mask
