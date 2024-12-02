@@ -77,6 +77,8 @@ class Card:
         return self.suit == other.suit and self.rank == other.rank
 
     def __repr__(self) -> str:
+        if is_void_card(self):
+            return ' '
         return f"{self.encoder[self.rank]}{self.suit.value}"
 
     def __hash__(self) -> int:

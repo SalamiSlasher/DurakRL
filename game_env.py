@@ -217,6 +217,9 @@ class CardLoopStackItem:
     def __str__(self):
         return f"({self.attacker_card}, {self.defender_card})"
 
+    def __repr__(self):
+        return self.__str__()
+
 
 def is_possible_attack(card_in_hand: Card, desk: list[CardLoopStackItem]) -> bool:
     ranks_in_play = set()
@@ -281,7 +284,7 @@ class Player:
 
 
 if __name__ == "__main__":
-    DEBUG = False
+    DEBUG = True
     for i in range(1):
         random.seed(i)
         try:
