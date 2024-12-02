@@ -3,7 +3,6 @@ from __future__ import annotations
 import itertools
 from enum import Enum, IntEnum
 from random import shuffle
-from typing import List, Tuple
 
 
 class Suit(Enum):
@@ -29,16 +28,18 @@ class Suit(Enum):
         return float(int(self))
 
     @classmethod
-    def from_int(cls, integer: int) -> Suit:
-        if integer == -1:
+    def from_int(cls, suit_integer: int) -> Suit:
+        if suit_integer not in {-1, 0, 1, 2, 3}:
+            raise ValueError('Invalid suit_integer')
+        if suit_integer == -1:
             return Suit.VOID
-        elif integer == 0:
+        elif suit_integer == 0:
             return Suit.HEARTS
-        elif integer == 1:
+        elif suit_integer == 1:
             return Suit.DIAMONDS
-        elif integer == 2:
+        elif suit_integer == 2:
             return Suit.CLUBS
-        elif integer == 3:
+        elif suit_integer == 3:
             return Suit.SPADES
 
 

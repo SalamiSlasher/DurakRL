@@ -18,21 +18,18 @@ import torch.nn.functional as F
 from card_methods import Suit, void_card, mapping
 
 from card_methods import Card
-from game_env import CardLoopStackItem, Bita, Take
-from game_env import is_possible_attack
-
-
-TABLE_TENSOR_LEN = 36 * 37
-
-INPUT_LEN = (
-    36  # hand
-    + 36 * 37  # table
-    + 36  # bita
-    + 1  # is attacker
-    + 4  # what suit is trump
+from game_env import (
+    CardLoopStackItem,
+    Bita,
+    Take,
+    DurakEnv,
+    Transition,
+    GameState,
+    get_action_mask,
+    INPUT_LEN,
+    OUTPUT_LEN,
 )
-
-OUTPUT_LEN = 38
+from game_env import is_possible_attack
 
 
 plt.ion()
@@ -45,73 +42,6 @@ device = torch.device(
     if torch.backends.mps.is_available()
     else "cpu"
 )
-
-
-class GameState:
-    def __init__(
-        self,
-        hand: list[Card],
-        table: list[CardLoopStackItem],
-        discard_pile: list[Card],
-        seen_opponent_cards: list[Card],
-        is_attacker: bool,
-        trump: Suit,
-    ) -> None:
-        self.hand = hand
-        self.table = table
-        self.discard_pile = discard_pile
-        self.seen_opponent_cards = seen_opponent_cards
-        self.is_attacker = is_attacker
-        self.trump = trump
-
-    def to_tensor(self) -> torch.Tensor:
-        hand_tensor = torch.zeros(36)  # Например, 36 карт в колоде
-        for card in self.hand:
-            hand_tensor[card.id] = 1
-
-        table_tensor = torch.zeros(
-            TABLE_TENSOR_LEN
-        )  # Для каждой пары карты (атака + защита)
-        for card_pair in self.table:
-            idx = mapping[(card_pair.attacker_card, card_pair.defender_card)]
-            table_tensor[idx] = 1
-
-        discard_pile_tensor = torch.zeros(36)  # Битая колода
-        for card in self.discard_pile:
-            discard_pile_tensor[card.id] = 1
-
-        # seen_opponent_cards_tensor = torch.zeros(
-        #     36
-        # )  # Карты противника, которые мы видели
-        # for card in self.seen_opponent_cards:
-        #     seen_opponent_cards_tensor[card.id] = 1
-
-        is_attacker_tensor = torch.tensor([1.0 if self.is_attacker else 0.0])
-        trump_tensor = torch.zeros(4)
-        trump_tensor[int(self.trump)] = 1
-
-        # Объединяем все тензоры в один вектор
-        return torch.cat(
-            [
-                hand_tensor,
-                table_tensor,
-                discard_pile_tensor,
-                # seen_opponent_cards_tensor,
-                is_attacker_tensor,
-                trump_tensor,
-            ]
-        )
-
-
-Action: TypeAlias = Card | Bita | Take
-
-
-class Transition(NamedTuple):
-    state: GameState
-    action: Action
-    next_state: GameState
-    reward: float
-    done: bool
 
 
 class ReplayMemory:
@@ -129,64 +59,6 @@ class ReplayMemory:
         return len(self.memory)
 
 
-def get_attack_action_mask(mask: list[int], state: GameState) -> list[int]:
-    mask[1] = 0  # cannot say Take
-
-    if len(state.table) == 0:  # no cards in play
-        return mask
-
-    for i, card in enumerate(state.hand):
-        if not is_possible_attack(card, state.table):
-            mask[i + 2] = 0
-
-    return mask
-
-
-def get_defender_action_mask(mask: list[int], state: GameState) -> list[int]:
-    mask[0] = 0  # cannot say Bita
-
-    if not state.table:
-        raise AssertionError(
-            "Unreachable: cannot defend when there are no cards in play"
-        )
-
-    for i, card in enumerate(state.hand):
-        attack_cards = []
-        for card_pair in state.table:
-            if card_pair.defender_card == void_card:
-                attack_cards.append(card_pair.attacker_card)
-
-        if len(attack_cards) > 1:
-            raise AssertionError("Unreachable: more than one attack_card")
-
-        if len(attack_cards) < 1:
-            raise AssertionError(
-                "Unreachable: cannot defend when there are no cards in play"
-            )
-
-        if not Card.can_beat(
-            attack_card=attack_cards[0], defend_card=card, trump=state.trump
-        ):
-            mask[i + 2] = 0  # do not choose from these cards
-
-    return mask
-
-
-def get_action_mask(state: GameState) -> list[int]:
-    mask = [1] * (len(state.hand) + 2)
-    # mask[0] == Bita  # first action in mark is always Bita
-    # mask[1] == Take  # second action in mark is always Take
-    # isinstance(mask[2:], list[Card]) == True  # rest elements are Card objects
-
-    if state.is_attacker:
-        mask = get_attack_action_mask(mask, state)
-
-    else:
-        mask = get_defender_action_mask(mask, state)
-
-    return mask
-
-
 class Actor(Protocol):
     def __call__(self, state: GameState) -> torch.Tensor: ...
 
@@ -201,9 +73,6 @@ EPS_DECAY = 1000
 TAU = 0.005
 LR = 1e-4
 steps_done = 0
-
-
-
 
 
 class DQN(nn.Module):
@@ -228,13 +97,15 @@ class Agent:
     def __init__(self, start_hand: list[Card], trump: Suit) -> None:
         self.policy_net = DQN().to(device)
         self.target_net = DQN().to(device)
-        self.target_net.load_state_dict(self.policy_net.state_dict())  # Инициализация целевой сети
+        self.target_net.load_state_dict(
+            self.policy_net.state_dict()
+        )  # Инициализация целевой сети
         self.target_net.eval()  # Остановка обновлений target_net
         self.optimizer = optim.Adam(self.policy_net.parameters(), lr=LR)
         self.memory = ReplayMemory(10000)
         self.steps_done = 0
 
-    def select_action(self, state: GameState) -> int:
+    def select_action(self, state: GameState) -> float:
         """
         Выбор действия на основе ε-жадности
         """
@@ -246,7 +117,9 @@ class Agent:
 
         if sample > eps_threshold:
             with torch.no_grad():
-                q_values = self.policy_net(state.to_tensor())  # Получаем прогноз Q-значений
+                q_values = self.policy_net(
+                    state.to_tensor()
+                )  # Получаем прогноз Q-значений
                 masked_q_values = q_values * torch.tensor(mask)  # Применяем маску
                 return torch.argmax(masked_q_values).item()
         else:
@@ -262,10 +135,16 @@ class Agent:
 
         transitions = self.memory.sample(BATCH_SIZE)
 
-        state_batch = torch.stack([transition.state.to_tensor() for transition in transitions])
-        action_batch = torch.tensor([transition.action for transition in transitions]).unsqueeze(1)
+        state_batch = torch.stack(
+            [transition.state.to_tensor() for transition in transitions]
+        )
+        action_batch = torch.tensor(
+            [transition.action for transition in transitions]
+        ).unsqueeze(1)
         reward_batch = torch.tensor([transition.reward for transition in transitions])
-        next_state_batch = torch.stack([transition.next_state.to_tensor() for transition in transitions])
+        next_state_batch = torch.stack(
+            [transition.next_state.to_tensor() for transition in transitions]
+        )
         done_batch = torch.tensor([transition.done for transition in transitions])
 
         # Получаем Q-значения для текущих состояний
@@ -276,7 +155,9 @@ class Agent:
         next_state_values = next_state_values.detach()
 
         # Рассчитываем целевые значения для Q
-        expected_state_action_values = reward_batch + (GAMMA * next_state_values * (1 - done_batch))
+        expected_state_action_values = reward_batch + (
+            GAMMA * next_state_values * (1 - done_batch)
+        )
 
         # Рассчитываем потери
         loss = F.mse_loss(state_action_values.squeeze(), expected_state_action_values)
@@ -285,7 +166,8 @@ class Agent:
         self.optimizer.zero_grad()
         loss.backward()
         for param in self.policy_net.parameters():
-            param.grad.data.clamp_(-1, 1)  # Ограничиваем градиенты
+            if param.grad:
+                param.grad.data.clamp_(-1, 1)  # Ограничиваем градиенты
         self.optimizer.step()
 
     def update_target_network(self):
@@ -295,7 +177,10 @@ class Agent:
         self.target_net.load_state_dict(self.policy_net.state_dict())
 
 
-def play_game(agent: Agent, environment: GameEnvironment) -> float:
+TARGET_UPDATE = 100
+
+
+def play_game(agent: Agent, environment: DurakEnv) -> float:
     """
     Функция для игры одного эпизода
     """
@@ -305,7 +190,9 @@ def play_game(agent: Agent, environment: GameEnvironment) -> float:
 
     while not done:
         action = agent.select_action(state)  # Выбор действия
-        next_state, reward, done = environment.step(action)  # Выполнение действия и получение нового состояния
+        next_state, reward, done = environment.step(
+            action
+        )  # Выполнение действия и получение нового состояния
         total_reward += reward
 
         # Сохранение перехода в буфер
