@@ -1,15 +1,44 @@
 from __future__ import annotations
 
-import random
-import numpy as np
-from collections import deque
-from typing import TypeAlias, NamedTuple, Any
+from typing import Final
+from typing import NamedTuple
+from typing import Protocol
+from typing import TypeAlias
 
+from collections import deque
+from itertools import count
+
+import math
+import random
+
+from gymnasium import Env
+from gymnasium import spaces
+
+import gymnasium as gym
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
 import torch
-from gymnasium import Env, spaces
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.optim as optim
+
+from card_methods import Card
+from card_methods import Suit
+from card_methods import mapping
+from card_methods import void_card
+from game_env import INPUT_LEN
+from game_env import OUTPUT_LEN
+from game_env import Bita
+from game_env import CardLoopStackItem
+from game_env import DurakEnv
+from game_env import GameState
+from game_env import Take
+from game_env import Transition
+from game_env import get_action_mask
+from game_env import is_possible_attack
 
 import card_methods
-from card_methods import Card, Suit, void_card, mapping
 
 TABLE_TENSOR_LEN = 36 * 37
 INPUT_LEN = (
@@ -23,13 +52,211 @@ INPUT_LEN = (
 OUTPUT_LEN = 38
 DEBUG = True
 
+plt.ion()
+
+
+device = torch.device(
+    'cuda'
+    if torch.cuda.is_available()
+    else 'mps'
+    if torch.backends.mps.is_available()
+    else 'cpu'
+)
+
+
+class ReplayMemory:
+    def __init__(self, capacity: int) -> None:
+        self.memory: deque[Transition] = deque([], maxlen=capacity)
+
+    def push(self, transition: Transition) -> None:
+        """Save a transition"""
+        self.memory.append(transition)
+
+    def sample(self, batch_size: int) -> list[Transition]:
+        return random.sample(self.memory, batch_size)
+
+    def __len__(self) -> int:
+        return len(self.memory)
+
+
+class Actor(Protocol):
+    def __call__(self, state: GameState) -> torch.Tensor: ...
+
+    policy_net: DQN
+
+
+BATCH_SIZE = 128
+GAMMA = 0.99
+EPS_START = 0.9
+EPS_END = 0.05
+EPS_DECAY = 1000
+TAU = 0.005
+LR = 1e-4
+steps_done = 0
+
+
+class DQN(nn.Module):
+    def __init__(
+        self, n_observations: int = INPUT_LEN, n_actions: int = OUTPUT_LEN
+    ):
+        super(DQN, self).__init__()
+        self.layer1 = nn.Linear(n_observations, 128)
+        self.layer2 = nn.Linear(128, 128)
+        self.layer3 = nn.Linear(128, n_actions)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        x = F.selu(self.layer1(x))
+        x = F.selu(self.layer2(x))
+
+        logits = self.layer3(x)
+
+        probabilities = F.softmax(logits, dim=-1)
+
+        return probabilities
+
+
+class Agent:
+    def __init__(self, start_hand: list[Card], trump: Suit) -> None:
+        self.policy_net = DQN().to(device)
+        self.target_net = DQN().to(device)
+        self.target_net.load_state_dict(
+            self.policy_net.state_dict()
+        )  # Инициализация целевой сети
+        self.target_net.eval()  # Остановка обновлений target_net
+        self.optimizer = optim.Adam(self.policy_net.parameters(), lr=LR)
+        self.memory = ReplayMemory(10000)
+        self.steps_done = 0
+
+    def select_action(self, state: GameState) -> float:
+        """
+        Выбор действия на основе ε-жадности
+        """
+        sample = random.random()
+        eps_threshold = EPS_END + (EPS_START - EPS_END) * math.exp(
+            -1.0 * self.steps_done / EPS_DECAY
+        )
+        mask = get_action_mask(state)
+
+        if sample > eps_threshold:
+            with torch.no_grad():
+                q_values = self.policy_net(
+                    state.to_tensor()
+                )  # Получаем прогноз Q-значений
+                masked_q_values = q_values * torch.tensor(
+                    mask
+                )  # Применяем маску
+                return torch.argmax(masked_q_values).item()
+        else:
+            valid_actions = [i for i, m in enumerate(mask) if m == 1]
+            return random.choice(valid_actions)  # Выбираем случайное действие
+
+    def optimize_model(self) -> None:
+        """
+        Обучение модели через минимизацию ошибки Q-функции
+        """
+        if len(self.memory) < BATCH_SIZE:
+            return
+
+        transitions = self.memory.sample(BATCH_SIZE)
+
+        state_batch = torch.stack([
+            transition.state.to_tensor() for transition in transitions
+        ])
+        action_batch = torch.tensor([
+            transition.action for transition in transitions
+        ]).unsqueeze(1)
+        reward_batch = torch.tensor([
+            transition.reward for transition in transitions
+        ])
+        next_state_batch = torch.stack([
+            transition.next_state.to_tensor() for transition in transitions
+        ])
+        done_batch = torch.tensor([
+            transition.done for transition in transitions
+        ])
+
+        # Получаем Q-значения для текущих состояний
+        state_action_values = self.policy_net(state_batch).gather(
+            1, action_batch
+        )
+
+        # Получаем максимальные Q-значения для будущих состояний из целевой сети
+        next_state_values = self.target_net(next_state_batch).max(1)[0]
+        next_state_values = next_state_values.detach()
+
+        # Рассчитываем целевые значения для Q
+        expected_state_action_values = reward_batch + (
+            GAMMA * next_state_values * (1 - done_batch)
+        )
+
+        # Рассчитываем потери
+        loss = F.mse_loss(
+            state_action_values.squeeze(), expected_state_action_values
+        )
+
+        # Обновляем веса сети
+        self.optimizer.zero_grad()
+        loss.backward()
+        for param in self.policy_net.parameters():
+            if param.grad:
+                param.grad.data.clamp_(-1, 1)  # Ограничиваем градиенты
+        self.optimizer.step()
+
+    def update_target_network(self):
+        """
+        Обновляем целевую сеть
+        """
+        self.target_net.load_state_dict(self.policy_net.state_dict())
+
+
+TARGET_UPDATE = 100
+
+
+def play_game(agent: Agent, environment: DurakEnv) -> float:
+    """
+    Функция для игры одного эпизода
+    """
+    state = environment.reset()  # Инициализация состояния игры
+    total_reward = 0.0
+    done = False
+
+    while not done:
+        action = agent.select_action(state)  # Выбор действия
+        next_state, reward, done = environment.step(
+            action
+        )  # Выполнение действия и получение нового состояния
+        total_reward += reward
+
+        # Сохранение перехода в буфер
+        transition = Transition(state, action, next_state, reward, done)
+        agent.memory.push(transition)
+
+        # Обучение модели
+        agent.optimize_model()
+
+        # Обновление целевой сети с определенной частотой
+        if agent.steps_done % TARGET_UPDATE == 0:
+            agent.update_target_network()
+
+        agent.steps_done += 1
+
+        state = next_state
+
+    return total_reward
+
+
+if __name__ == '__main__':
+    random.seed(42)
+
 
 class Singleton(type):
     _instances = {}
 
     def __call__(cls, *args, **kwargs):
         if cls not in cls._instances:
-            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+            cls._instances[cls] = super(Singleton, cls).__call__(
+                *args, **kwargs
+            )
         return cls._instances[cls]
 
 
@@ -61,7 +288,7 @@ def encode_action(action: Action, state: GameState) -> int:
     elif isinstance(action, Card):
         return 2 + state.hand.index(action)  # Cards are indexed starting from 2
     else:
-        raise ValueError(f"Unknown action type: {action}")
+        raise ValueError(f'Unknown action type: {action}')
 
 
 def decode_action(action_index: int, state: GameState) -> Action:
@@ -75,11 +302,10 @@ def decode_action(action_index: int, state: GameState) -> Action:
     elif action_index >= 2 and action_index < 2 + len(state.hand):
         return state.hand[action_index - 2]
     else:
-        raise ValueError(f"Invalid action index: {action_index}")
+        raise ValueError(f'Invalid action index: {action_index}')
 
 
-
-def log_msg(msg, sep="=" * 50):
+def log_msg(msg, sep='=' * 50):
     if DEBUG:
         print(sep + str(msg) + sep)
 
@@ -128,78 +354,74 @@ class GameState:
         trump_tensor[int(self.trump)] = 1
 
         # Объединяем все тензоры в один вектор
-        return torch.cat(
-            [
-                hand_tensor,
-                table_tensor,
-                discard_pile_tensor,
-                # seen_opponent_cards_tensor,
-                is_attacker_tensor,
-                trump_tensor,
-            ]
-        )
+        return torch.cat([
+            hand_tensor,
+            table_tensor,
+            discard_pile_tensor,
+            # seen_opponent_cards_tensor,
+            is_attacker_tensor,
+            trump_tensor,
+        ])
 
 
 class GameTensorState:
-        def __init__(
-            self,
-            hand_tensor: torch.Tensor,
-            table_tensor: torch.Tensor,
-            discard_pile_tensor: torch.Tensor,
-            is_attacker_tensor: torch.Tensor,
-            trump_tensor: torch.Tensor,
-        ):
-            self.hand_tensor = hand_tensor
-            self.table_tensor = table_tensor
-            self.discard_pile_tensor = discard_pile_tensor
-            self.is_attacker_tensor = is_attacker_tensor
-            self.trump_tensor = trump_tensor
+    def __init__(
+        self,
+        hand_tensor: torch.Tensor,
+        table_tensor: torch.Tensor,
+        discard_pile_tensor: torch.Tensor,
+        is_attacker_tensor: torch.Tensor,
+        trump_tensor: torch.Tensor,
+    ):
+        self.hand_tensor = hand_tensor
+        self.table_tensor = table_tensor
+        self.discard_pile_tensor = discard_pile_tensor
+        self.is_attacker_tensor = is_attacker_tensor
+        self.trump_tensor = trump_tensor
 
-        def to_tensor(self) -> torch.Tensor:
-            """
-            Объединяет все тензоры в один вектор.
-            """
-            return torch.cat(
-                [
-                    self.hand_tensor,
-                    self.table_tensor,
-                    self.discard_pile_tensor,
-                    self.is_attacker_tensor,
-                    self.trump_tensor,
-                ]
-            )
+    def to_tensor(self) -> torch.Tensor:
+        """
+        Объединяет все тензоры в один вектор.
+        """
+        return torch.cat([
+            self.hand_tensor,
+            self.table_tensor,
+            self.discard_pile_tensor,
+            self.is_attacker_tensor,
+            self.trump_tensor,
+        ])
 
-        @staticmethod
-        def from_game_state(state: GameState) -> GameTensorState:
-            """
-            Преобразует GameState в GameTensorState.
-            """
-            hand_tensor = torch.zeros(36)  # 36 карт в колоде
-            for card in state.hand:
-                hand_tensor[card.id] = 1
+    @staticmethod
+    def from_game_state(state: GameState) -> GameTensorState:
+        """
+        Преобразует GameState в GameTensorState.
+        """
+        hand_tensor = torch.zeros(36)  # 36 карт в колоде
+        for card in state.hand:
+            hand_tensor[card.id] = 1
 
-            table_tensor = torch.zeros(
-                TABLE_TENSOR_LEN
-            )  # Для пар карт (атака + защита)
-            for card_pair in state.table:
-                idx = mapping[(card_pair.attacker_card, card_pair.defender_card)]
-                table_tensor[idx] = 1
+        table_tensor = torch.zeros(
+            TABLE_TENSOR_LEN
+        )  # Для пар карт (атака + защита)
+        for card_pair in state.table:
+            idx = mapping[(card_pair.attacker_card, card_pair.defender_card)]
+            table_tensor[idx] = 1
 
-            discard_pile_tensor = torch.zeros(36)  # Битые карты
-            for card in state.discard_pile:
-                discard_pile_tensor[card.id] = 1
+        discard_pile_tensor = torch.zeros(36)  # Битые карты
+        for card in state.discard_pile:
+            discard_pile_tensor[card.id] = 1
 
-            is_attacker_tensor = torch.tensor([1.0 if state.is_attacker else 0.0])
-            trump_tensor = torch.zeros(4)  # Кодирование масти козыря
-            trump_tensor[int(state.trump)] = 1
+        is_attacker_tensor = torch.tensor([1.0 if state.is_attacker else 0.0])
+        trump_tensor = torch.zeros(4)  # Кодирование масти козыря
+        trump_tensor[int(state.trump)] = 1
 
-            return GameTensorState(
-                hand_tensor,
-                table_tensor,
-                discard_pile_tensor,
-                is_attacker_tensor,
-                trump_tensor,
-            )
+        return GameTensorState(
+            hand_tensor,
+            table_tensor,
+            discard_pile_tensor,
+            is_attacker_tensor,
+            trump_tensor,
+        )
 
 
 class Transition(NamedTuple):
@@ -210,14 +432,18 @@ class Transition(NamedTuple):
     done: bool
 
 
-def create_attack_mask(hand_tensor: torch.Tensor, table_tensor: torch.Tensor) -> list[int]:
+def create_attack_mask(
+    hand_tensor: torch.Tensor, table_tensor: torch.Tensor
+) -> list[int]:
     """
     Создаёт маску действий для фазы атаки.
     """
     mask = [1] * OUTPUT_LEN
     mask[1] = 0  # Take запрещён для атакующего
 
-    if table_tensor.sum().item() == 0:  # Если на столе ничего нет, можно играть любую карту
+    if (
+        table_tensor.sum().item() == 0
+    ):  # Если на столе ничего нет, можно играть любую карту
         return mask
 
     # Если карты уже на столе, атаковать можно только с совпадающим ранком
@@ -257,7 +483,9 @@ def create_defense_mask(
         return mask
 
     # Проверить, чем можно отбить
-    attack_card = attack_cards[0]  # Предполагаем, что на столе только одна карта для защиты
+    attack_card = attack_cards[
+        0
+    ]  # Предполагаем, что на столе только одна карта для защиты
     for i, card_id in enumerate(hand_tensor.nonzero(as_tuple=True)[0]):
         card = Card.from_id(card_id.item())
         if not Card.can_beat(attack_card, card, Suit.from_int(trump_suit)):
@@ -407,11 +635,19 @@ def create_action_mask(
 
 
 class GamePhase:
-    ATTACK = "attack"
-    DEFENSE = "defense"
-    END_TURN = "end_turn"
-    ROTATE = "rotate"
-    END_GAME = "end_game"
+    ATTACK = 'attack'
+    DEFENSE = 'defense'
+    END_TURN = 'end_turn'
+    ROTATE = 'rotate'
+    END_GAME = 'end_game'
+
+
+class Player(Protocol):
+    def __init__(self, name: str) -> None: ...
+
+    def get_card(self, card: Card) -> None: ...
+
+    def act(self, state: GameTensorState) -> Action: ...
 
 
 class DurakStateGame:
@@ -431,7 +667,7 @@ class DurakStateGame:
 
     def initialize_game(self) -> None:
         if len(self.players) < 2:
-            raise ValueError("Not enough players")
+            raise ValueError('Not enough players')
 
         # Deal cards
         for _ in range(6):
@@ -458,26 +694,32 @@ class DurakStateGame:
         elif self.phase == GamePhase.ROTATE:
             self._process_rotation()
         elif self.phase == GamePhase.END_GAME:
-            raise RuntimeError("Game has ended. Reset to start a new game.")
+            raise RuntimeError('Game has ended. Reset to start a new game.')
 
     def _process_attack(self, action: Action) -> None:
         if isinstance(action, Card):
             # Attacker plays a card
-            self.turn_stack.append(CardLoopStackItem(action, self.current_attacker, self.current_defender))
+            self.turn_stack.append(
+                CardLoopStackItem(
+                    action, self.current_attacker, self.current_defender
+                )
+            )
             self.current_attacker.cards.remove(action)
             self.phase = GamePhase.DEFENSE
         elif isinstance(action, Bita):
             # Defender chooses to defend off
             self.phase = GamePhase.END_TURN
         else:
-            raise ValueError(f"Invalid action in attack phase: {action}")
+            raise ValueError(f'Invalid action in attack phase: {action}')
 
     def _process_defense(self, action: Action):
         if isinstance(action, Card):
             # Defender plays a card
             attack_card = self.turn_stack[-1].attacker_card
             if not Card.can_beat(attack_card, action, self.trump):
-                raise ValueError(f"Invalid defense: {action} cannot beat {attack_card}")
+                raise ValueError(
+                    f'Invalid defense: {action} cannot beat {attack_card}'
+                )
 
             self.turn_stack[-1].defender_card = action
             self.current_defender.cards.remove(action)
@@ -498,10 +740,10 @@ class DurakStateGame:
                 self.phase = GamePhase.END_TURN
             else:
                 raise ValueError(
-                    "Bita is not allowed: some attack cards are not defended."
+                    'Bita is not allowed: some attack cards are not defended.'
                 )
         else:
-            raise ValueError(f"Invalid action in defense phase: {action}")
+            raise ValueError(f'Invalid action in defense phase: {action}')
 
     def _process_end_turn(self) -> None:
         # Clean up the table and prepare for the next turn
@@ -534,13 +776,12 @@ class DurakStateGame:
         return self.phase == GamePhase.END_GAME
 
 
-
 class DurakEnv(Env):
     def __init__(self):
         super().__init__()
         self.game = DurakStateGame()
-        self.game.add_player(Player("RL_AGENT"))
-        self.game.add_player(Player("OPPONENT"))
+        self.game.add_player(Player('RL_AGENT'))
+        self.game.add_player(Player('OPPONENT'))
 
         self.observation_space = spaces.Box(
             low=0, high=1, shape=(INPUT_LEN,), dtype=np.float32
@@ -559,11 +800,13 @@ class DurakEnv(Env):
             trump_suit=int(state.trump),
             is_attacker=state.is_attacker,
         )
-        return self.current_tensor_state.to_tensor().numpy(), {"action_mask": self.action_mask}
+        return self.current_tensor_state.to_tensor().numpy(), {
+            'action_mask': self.action_mask
+        }
 
     def step(self, action: int):
         if self.action_mask[action] == 0:
-            raise ValueError(f"Invalid action: {action}")
+            raise ValueError(f'Invalid action: {action}')
 
         if action == 0:  # Bita
             self.game.take_step(Bita())
@@ -577,7 +820,7 @@ class DurakEnv(Env):
 
             if hand_index >= len(valid_hand_indices):
                 raise IndexError(
-                    f"Invalid hand index: {hand_index}, valid indices: {valid_hand_indices.tolist()}"
+                    f'Invalid hand index: {hand_index}, valid indices: {valid_hand_indices.tolist()}'
                 )
 
             card_id = valid_hand_indices[hand_index].item()
@@ -603,7 +846,7 @@ class DurakEnv(Env):
             reward,
             done,
             False,
-            {"action_mask": self.action_mask},
+            {'action_mask': self.action_mask},
         )
 
     def _get_state(self, player: Player):
@@ -624,9 +867,13 @@ class DurakEnv(Env):
         Генерирует маску действий на основе текущей фазы игры.
         """
         if self.game.phase == GamePhase.ATTACK:
-            return get_attack_action_mask([1] * OUTPUT_LEN, self.current_tensor_state)
+            return get_attack_action_mask(
+                [1] * OUTPUT_LEN, self.current_tensor_state
+            )
         elif self.game.phase == GamePhase.DEFENSE:
-            return get_defender_action_mask([1] * OUTPUT_LEN, self.current_tensor_state)
+            return get_defender_action_mask(
+                [1] * OUTPUT_LEN, self.current_tensor_state
+            )
         else:
             return [0] * OUTPUT_LEN  # Нет доступных действий в других фазах
 
@@ -638,11 +885,14 @@ class DurakEnv(Env):
             return Bita()
         elif action_index == 1:
             return Take()
-        elif action_index >= 2 and action_index < 2 + len(self.current_tensor_state.hand_tensor.nonzero()):
-            return self.current_tensor_state.hand_tensor.nonzero()[action_index - 2].item()
+        elif action_index >= 2 and action_index < 2 + len(
+            self.current_tensor_state.hand_tensor.nonzero()
+        ):
+            return self.current_tensor_state.hand_tensor.nonzero()[
+                action_index - 2
+            ].item()
         else:
-            raise ValueError(f"Invalid action index: {action_index}")
-
+            raise ValueError(f'Invalid action index: {action_index}')
 
 
 def encode_action_tensor(action: Action, state: GameState) -> torch.Tensor:
@@ -658,12 +908,13 @@ def encode_action_tensor(action: Action, state: GameState) -> torch.Tensor:
         card_index = 2 + state.hand.index(action)
         action_tensor[card_index] = 1
     else:
-        raise ValueError(f"Unknown action type: {action}")
+        raise ValueError(f'Unknown action type: {action}')
     return action_tensor
 
 
-
-def decode_action_tensor(action_tensor: torch.Tensor, state: GameState) -> Action:
+def decode_action_tensor(
+    action_tensor: torch.Tensor, state: GameState
+) -> Action:
     """
     Декодирует тензор действия в объект действия (Bita, Take, Card).
     """
@@ -675,9 +926,7 @@ def decode_action_tensor(action_tensor: torch.Tensor, state: GameState) -> Actio
     elif action_index >= 2 and action_index < 2 + len(state.hand):
         return state.hand[action_index - 2]
     else:
-        raise ValueError(f"Invalid action index in tensor: {action_index}")
-
-
+        raise ValueError(f'Invalid action index in tensor: {action_index}')
 
 
 # class DurakGame:
@@ -857,10 +1106,12 @@ class CardLoopStackItem:
         return tmp
 
     def __str__(self):
-        return f"({self.attacker_card}, {self.defender_card})"
+        return f'({self.attacker_card}, {self.defender_card})'
 
 
-def is_possible_attack(card_in_hand: Card, desk: list[CardLoopStackItem]) -> bool:
+def is_possible_attack(
+    card_in_hand: Card, desk: list[CardLoopStackItem]
+) -> bool:
     ranks_in_play = set()
     for card in desk:
         ranks_in_play.add(card.attacker_card.rank)
@@ -899,7 +1150,10 @@ class Player:
             return True
 
         flatten_stack = CardLoopStackItem.flatten_table_stack(table_stack)
-        return len(card_methods.possible_attack_cards(flatten_stack, self.cards)) > 0
+        return (
+            len(card_methods.possible_attack_cards(flatten_stack, self.cards))
+            > 0
+        )
 
     def __len__(self):
         return len(self.cards)
@@ -916,25 +1170,27 @@ class Player:
         return defend_card
 
     def __str__(self):
-        return f"{self.name}: {self.cards}"
+        return f'{self.name}: {self.cards}'
 
     def __repr__(self):
         return str(self)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     DEBUG = False
     for i in range(1):
         random.seed(i)
         try:
             game = DurakGame()
-            game.add_player(Player(name="ACTOR_1"))
-            game.add_player(Player(name="ACTOR_2"))
-            game.add_player(Player(name="ACTOR_3"))
+            game.add_player(Player(name='ACTOR_1'))
+            game.add_player(Player(name='ACTOR_2'))
+            game.add_player(Player(name='ACTOR_3'))
             game.start_game()
         except IndexError:
-            print(f"failed seed:= {i}")
+            print(f'failed seed:= {i}')
             raise
 
-        assert not game.players or len(game.players[0]) % 2 == 0, f"failed seed:= {i}"
+        assert not game.players or len(game.players[0]) % 2 == 0, (
+            f'failed seed:= {i}'
+        )
         pass

@@ -1,16 +1,18 @@
 from __future__ import annotations
 
-import itertools
-from enum import Enum, IntEnum
+from enum import Enum
+from enum import IntEnum
 from random import shuffle
+
+import itertools
 
 
 class Suit(Enum):
-    HEARTS = "♡"
-    DIAMONDS = "♢"
-    CLUBS = "♣"
-    SPADES = "♠"
-    VOID = "void"
+    HEARTS = '♡'
+    DIAMONDS = '♢'
+    CLUBS = '♣'
+    SPADES = '♠'
+    VOID = 'void'
 
     def __int__(self):
         if self == Suit.VOID:
@@ -58,16 +60,16 @@ class Rank(IntEnum):
 
 class Card:
     encoder = {
-        Rank.SIX: "6",
-        Rank.SEVEN: "7",
-        Rank.EIGHT: "8",
-        Rank.NINE: "9",
-        Rank.TEN: "10",
-        Rank.JACK: "J",
-        Rank.QUEEN: "Q",
-        Rank.KING: "K",
-        Rank.ACE: "A",
-        Rank.VOID: "VOID",
+        Rank.SIX: '6',
+        Rank.SEVEN: '7',
+        Rank.EIGHT: '8',
+        Rank.NINE: '9',
+        Rank.TEN: '10',
+        Rank.JACK: 'J',
+        Rank.QUEEN: 'Q',
+        Rank.KING: 'K',
+        Rank.ACE: 'A',
+        Rank.VOID: 'VOID',
     }
 
     def __init__(self, suit: Suit, rank: Rank) -> None:
@@ -78,7 +80,7 @@ class Card:
         return self.suit == other.suit and self.rank == other.rank
 
     def __repr__(self) -> str:
-        return f"{self.encoder[self.rank]}{self.suit.value}"
+        return f'{self.encoder[self.rank]}{self.suit.value}'
 
     def __hash__(self) -> int:
         return hash((self.suit, self.rank))
@@ -137,7 +139,9 @@ def get_full_deck() -> list[Card]:
 
 
 def generate_full_table_states() -> list[tuple[Card, Card]]:
-    return list(itertools.product(get_full_deck(), get_full_deck() + [void_card]))
+    return list(
+        itertools.product(get_full_deck(), get_full_deck() + [void_card])
+    )
 
 
 def possible_attack_cards(
@@ -147,7 +151,9 @@ def possible_attack_cards(
         return player_cards
 
     # Собираем ранги всех карт на столе, исключая пустые карты
-    table_ranks = set(card.rank for card in card_stack if not is_void_card(card))
+    table_ranks = set(
+        card.rank for card in card_stack if not is_void_card(card)
+    )
     # Возвращаем карты из руки игрока, ранги которых есть на столе
     possible_cards = [card for card in player_cards if card.rank in table_ranks]
     return possible_cards
@@ -170,12 +176,12 @@ for i in range(len(full_table_states)):
     mapping[full_table_states[i]] = i
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     deck = get_full_deck()
     dset = set()
     for d in deck:
         if d.id > 35:
-            print(d, d.id, "HERE")
+            print(d, d.id, 'HERE')
 
         print(d, d.id)
         dset.add(d.id)

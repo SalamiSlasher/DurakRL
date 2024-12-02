@@ -1,46 +1,48 @@
 from __future__ import annotations
 
-from typing import NamedTuple, Final, Protocol, TypeAlias
+from typing import Final
+from typing import NamedTuple
+from typing import Protocol
+from typing import TypeAlias
 
-import gymnasium as gym
-import math
-import random
-import matplotlib
-import matplotlib.pyplot as plt
 from collections import deque
 from itertools import count
 
+import math
+import random
+
+import gymnasium as gym
+import matplotlib
+import matplotlib.pyplot as plt
 import torch
 import torch.nn as nn
-import torch.optim as optim
 import torch.nn.functional as F
-
-from card_methods import Suit, void_card, mapping
+import torch.optim as optim
 
 from card_methods import Card
-from game_env import (
-    CardLoopStackItem,
-    Bita,
-    Take,
-    DurakEnv,
-    Transition,
-    GameState,
-    get_action_mask,
-    INPUT_LEN,
-    OUTPUT_LEN,
-)
+from card_methods import Suit
+from card_methods import mapping
+from card_methods import void_card
+from game_env import INPUT_LEN
+from game_env import OUTPUT_LEN
+from game_env import Bita
+from game_env import CardLoopStackItem
+from game_env import DurakEnv
+from game_env import GameState
+from game_env import Take
+from game_env import Transition
+from game_env import get_action_mask
 from game_env import is_possible_attack
-
 
 plt.ion()
 
 
 device = torch.device(
-    "cuda"
+    'cuda'
     if torch.cuda.is_available()
-    else "mps"
+    else 'mps'
     if torch.backends.mps.is_available()
-    else "cpu"
+    else 'cpu'
 )
 
 
@@ -76,7 +78,9 @@ steps_done = 0
 
 
 class DQN(nn.Module):
-    def __init__(self, n_observations: int = INPUT_LEN, n_actions: int = OUTPUT_LEN):
+    def __init__(
+        self, n_observations: int = INPUT_LEN, n_actions: int = OUTPUT_LEN
+    ):
         super(DQN, self).__init__()
         self.layer1 = nn.Linear(n_observations, 128)
         self.layer2 = nn.Linear(128, 128)
@@ -120,7 +124,9 @@ class Agent:
                 q_values = self.policy_net(
                     state.to_tensor()
                 )  # Получаем прогноз Q-значений
-                masked_q_values = q_values * torch.tensor(mask)  # Применяем маску
+                masked_q_values = q_values * torch.tensor(
+                    mask
+                )  # Применяем маску
                 return torch.argmax(masked_q_values).item()
         else:
             valid_actions = [i for i, m in enumerate(mask) if m == 1]
@@ -135,20 +141,26 @@ class Agent:
 
         transitions = self.memory.sample(BATCH_SIZE)
 
-        state_batch = torch.stack(
-            [transition.state.to_tensor() for transition in transitions]
-        )
-        action_batch = torch.tensor(
-            [transition.action for transition in transitions]
-        ).unsqueeze(1)
-        reward_batch = torch.tensor([transition.reward for transition in transitions])
-        next_state_batch = torch.stack(
-            [transition.next_state.to_tensor() for transition in transitions]
-        )
-        done_batch = torch.tensor([transition.done for transition in transitions])
+        state_batch = torch.stack([
+            transition.state.to_tensor() for transition in transitions
+        ])
+        action_batch = torch.tensor([
+            transition.action for transition in transitions
+        ]).unsqueeze(1)
+        reward_batch = torch.tensor([
+            transition.reward for transition in transitions
+        ])
+        next_state_batch = torch.stack([
+            transition.next_state.to_tensor() for transition in transitions
+        ])
+        done_batch = torch.tensor([
+            transition.done for transition in transitions
+        ])
 
         # Получаем Q-значения для текущих состояний
-        state_action_values = self.policy_net(state_batch).gather(1, action_batch)
+        state_action_values = self.policy_net(state_batch).gather(
+            1, action_batch
+        )
 
         # Получаем максимальные Q-значения для будущих состояний из целевой сети
         next_state_values = self.target_net(next_state_batch).max(1)[0]
@@ -160,7 +172,9 @@ class Agent:
         )
 
         # Рассчитываем потери
-        loss = F.mse_loss(state_action_values.squeeze(), expected_state_action_values)
+        loss = F.mse_loss(
+            state_action_values.squeeze(), expected_state_action_values
+        )
 
         # Обновляем веса сети
         self.optimizer.zero_grad()
@@ -213,5 +227,5 @@ def play_game(agent: Agent, environment: DurakEnv) -> float:
     return total_reward
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     random.seed(42)
