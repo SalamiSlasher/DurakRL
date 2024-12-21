@@ -1,7 +1,6 @@
 import numpy as np
 
-from game_env import DurakEnv
-from game_env import decode_action
+from legacy.game_env import DurakEnv
 
 # from game_env import get_action_mask
 
