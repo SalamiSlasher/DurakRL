@@ -10,7 +10,13 @@ from gymnasium.spaces import Dict
 from gymnasium.spaces import Discrete
 from pettingzoo.utils import AECEnv
 from pettingzoo.utils import agent_selector
+from collections import deque
 
+from torch import nn
+from torch import optim
+
+import torch
+import torch.nn.functional as F
 import numpy as np
 
 
@@ -460,14 +466,6 @@ class DurakAEC(AECEnv):
 # =============================================================================
 #                    Пример (очень упрощённого) DQN для self-play
 # =============================================================================
-
-from collections import deque
-
-from torch import nn
-from torch import optim
-
-import torch
-import torch.nn.functional as F
 
 
 class SimpleDQN(nn.Module):
