@@ -1,0 +1,2591 @@
+['8♦', '9♥', '7♦', 'Q♣', 'A♥', '10♣', 'K♠', 'Q♦', 'J♠', 'Q♠', 'K♣', '8♠', '8♣', 'K♥', '8♥', 'J♥', '10♥', 'A♣', '7♠', 'Q♥', '6♥', 'A♠', '9♦', '10♠']
+--- Agent turn #0.1 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #0.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #0.3 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #0.4 : player_1 ---
+Invalid action: Agent: player_1
+hi
+--- Agent turn #0.5 : player_0 ---
+player_0 => hand: ['A♦', '7♣', '9♠', '10♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♦', '6♣', '7♥', '9♣', 'K♦'], attacker=True, terminated=False
+Cards on table: ['6♠'], Attacking card: 6♠
+Discard: [], Deck: 24, Trump suit: ♠
+Agent: player_1. Action: 6♠
+---
+--- Agent turn #0.6 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #0.7 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #0.8 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #0.9 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #0.10 : player_0 ---
+player_0 => hand: ['A♦', '7♣', '9♠', '10♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♦', '6♣', '7♥', '9♣', 'K♦'], attacker=True, terminated=False
+Cards on table: ['6♠'], Attacking card: 6♠
+Discard: [], Deck: 24, Trump suit: ♠
+Agent: player_1. Action: 7♥
+---
+--- Agent turn #0.11 : player_1 ---
+player_0 => hand: ['A♦', '7♣', '10♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♦', '6♣', '7♥', '9♣', 'K♦'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠'], Deck: 24, Trump suit: ♠
+Agent: player_0. Action: 9♠
+---
+--- Agent turn #0.12 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #0.13 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #0.14 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #0.15 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #0.16 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #0.17 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #0.18 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #0.19 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #0.20 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #0.21 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #0.22 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #0.23 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #0.24 : player_1 ---
+Invalid action: Agent: player_1
+hi
+--- Agent turn #0.25 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #0.26 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #0.27 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #1.1 : player_1 ---
+player_0 => hand: ['A♦', '7♣', '9♦', '10♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♦', '6♣', '7♥', '9♣', '10♠', 'K♦'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠'], Deck: 22, Trump suit: ♠
+Agent: player_0. Action: Take
+---
+--- Agent turn #1.2 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #1.3 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #1.4 : player_0 ---
+player_0 => hand: ['A♦', '7♣', '9♦', '10♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♦', '6♣', '7♥', '9♣', '10♠'], attacker=True, terminated=False
+Cards on table: ['K♦'], Attacking card: K♦
+Discard: ['6♠', '9♠'], Deck: 22, Trump suit: ♠
+Agent: player_1. Action: K♦
+---
+--- Agent turn #1.5 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #1.6 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #2.1 : player_0 ---
+player_0 => hand: ['A♦', '7♣', '9♦', '10♦', 'J♦', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♦', 'A♠', '6♣', '7♥', '9♣', '10♠'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦'], Deck: 21, Trump suit: ♠
+Agent: player_1. Action: Bita
+---
+--- Agent turn #3.1 : player_1 ---
+player_0 => hand: ['A♦', '7♣', '9♦', '10♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♦', 'A♠', '6♣', '7♥', '9♣', '10♠'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦'], Deck: 21, Trump suit: ♠
+Agent: player_0. Action: Bita
+---
+--- Agent turn #3.2 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.3 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.4 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.5 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.6 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.7 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.8 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.9 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.10 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.11 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.12 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.13 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.14 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.15 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.16 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.17 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.18 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.19 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.20 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.21 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.22 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.23 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.24 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.25 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.26 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.27 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.28 : player_0 ---
+player_0 => hand: ['A♦', '7♣', '9♦', '10♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♦', 'A♠', '6♣', '7♥', '10♠'], attacker=True, terminated=False
+Cards on table: ['9♣'], Attacking card: 9♣
+Discard: ['6♠', '9♠', 'K♦'], Deck: 21, Trump suit: ♠
+Agent: player_1. Action: 9♣
+---
+--- Agent turn #3.29 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.30 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.31 : player_0 ---
+player_0 => hand: ['A♦', '7♣', '9♦', '10♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♦', 'A♠', '6♣', '7♥', '10♠'], attacker=True, terminated=False
+Cards on table: ['9♣'], Attacking card: 9♣
+Discard: ['6♠', '9♠', 'K♦'], Deck: 21, Trump suit: ♠
+Agent: player_1. Action: A♠
+---
+--- Agent turn #3.32 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.33 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.34 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.35 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.36 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.37 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.38 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.39 : player_0 ---
+player_0 => hand: ['A♦', '7♣', '9♦', '10♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♦', 'A♠', '6♣', '7♥', '10♠'], attacker=True, terminated=False
+Cards on table: ['9♣'], Attacking card: 9♣
+Discard: ['6♠', '9♠', 'K♦'], Deck: 21, Trump suit: ♠
+Agent: player_1. Action: 10♠
+---
+--- Agent turn #3.40 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.41 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.42 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.43 : player_0 ---
+player_0 => hand: ['A♦', '7♣', '9♦', '10♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♦', 'A♠', '6♣', '7♥', '10♠'], attacker=True, terminated=False
+Cards on table: ['9♣'], Attacking card: 9♣
+Discard: ['6♠', '9♠', 'K♦'], Deck: 21, Trump suit: ♠
+Agent: player_1. Action: 6♦
+---
+--- Agent turn #3.44 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.45 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.46 : player_1 ---
+Invalid action: Agent: player_1
+hi
+--- Agent turn #3.47 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.48 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.49 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.50 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.51 : player_0 ---
+player_0 => hand: ['A♦', '7♣', '9♦', '10♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♦', 'A♠', '6♣', '7♥', '10♠'], attacker=True, terminated=False
+Cards on table: ['9♣'], Attacking card: 9♣
+Discard: ['6♠', '9♠', 'K♦'], Deck: 21, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #3.52 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.53 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.54 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.55 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.56 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.57 : player_0 ---
+player_0 => hand: ['A♦', '7♣', '9♦', '10♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♦', 'A♠', '6♣', '7♥', '10♠'], attacker=True, terminated=False
+Cards on table: ['9♣'], Attacking card: 9♣
+Discard: ['6♠', '9♠', 'K♦'], Deck: 21, Trump suit: ♠
+Agent: player_1. Action: 6♣
+---
+--- Agent turn #3.58 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.59 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.60 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.61 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.62 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.63 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.64 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.65 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.66 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.67 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.68 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.69 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.70 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.71 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.72 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.73 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.74 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.75 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.76 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.77 : player_0 ---
+player_0 => hand: ['A♦', '7♣', '9♦', '10♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♦', 'A♠', '6♣', '7♥', '10♠'], attacker=True, terminated=False
+Cards on table: ['9♣'], Attacking card: 9♣
+Discard: ['6♠', '9♠', 'K♦'], Deck: 21, Trump suit: ♠
+Agent: player_1. Action: 6♣
+---
+--- Agent turn #3.78 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.79 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.80 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.81 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.82 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.83 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #3.84 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #3.85 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.1 : player_1 ---
+player_0 => hand: ['A♦', '7♣', '9♦', '9♣', '10♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♥', '6♦', 'A♠', '6♣', '7♥', '10♠'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦'], Deck: 20, Trump suit: ♠
+Agent: player_0. Action: Take
+---
+hi
+--- Agent turn #4.2 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.3 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.4 : player_0 ---
+player_0 => hand: ['A♦', '7♣', '9♦', '9♣', '10♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♥', '6♦', 'A♠', '6♣', '7♥', '10♠'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦'], Deck: 20, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #4.5 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.6 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.7 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.8 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.9 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.10 : player_0 ---
+player_0 => hand: ['A♦', '7♣', '9♦', '9♣', '10♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♥', '6♦', 'A♠', '6♣', '7♥', '10♠'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦'], Deck: 20, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #4.11 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.12 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.13 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.14 : player_0 ---
+player_0 => hand: ['A♦', '7♣', '9♦', '9♣', '10♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♥', '6♦', 'A♠', '6♣', '10♠'], attacker=True, terminated=False
+Cards on table: ['7♥'], Attacking card: 7♥
+Discard: ['6♠', '9♠', 'K♦'], Deck: 20, Trump suit: ♠
+Agent: player_1. Action: 7♥
+---
+--- Agent turn #4.15 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.16 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.17 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.18 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.19 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.20 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.21 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.22 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.23 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.24 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.25 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.26 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.27 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.28 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.29 : player_0 ---
+Invalid action: Agent: player_0
+hi
+--- Agent turn #4.30 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.31 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.32 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.33 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.34 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.35 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.36 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.37 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.38 : player_1 ---
+Invalid action: Agent: player_1
+hi
+--- Agent turn #4.39 : player_0 ---
+Invalid action: Agent: player_0
+hi
+--- Agent turn #4.40 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.41 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.42 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.43 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.44 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.45 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.46 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.47 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.48 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.49 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.50 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.51 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.52 : player_1 ---
+Invalid action: Agent: player_1
+hi
+--- Agent turn #4.53 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.54 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.55 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.56 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.57 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.58 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.59 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.60 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.61 : player_0 ---
+player_0 => hand: ['A♦', '7♣', '9♦', '9♣', '10♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♥', '6♦', 'A♠', '6♣', '10♠'], attacker=True, terminated=False
+Cards on table: ['7♥'], Attacking card: 7♥
+Discard: ['6♠', '9♠', 'K♦'], Deck: 20, Trump suit: ♠
+Agent: player_1. Action: A♠
+---
+--- Agent turn #4.62 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.63 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.64 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.65 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #4.66 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #4.67 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #5.1 : player_1 ---
+player_0 => hand: ['A♦', '7♥', '7♣', '9♦', '9♣', '10♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♥', '6♦', 'A♠', '6♣', '10♠', 'Q♥'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦'], Deck: 19, Trump suit: ♠
+Agent: player_0. Action: Take
+---
+hi
+--- Agent turn #5.2 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #5.3 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #5.4 : player_0 ---
+player_0 => hand: ['A♦', '7♥', '7♣', '9♦', '9♣', '10♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♥', '6♦', '6♣', '10♠', 'Q♥'], attacker=True, terminated=False
+Cards on table: ['A♠'], Attacking card: A♠
+Discard: ['6♠', '9♠', 'K♦'], Deck: 19, Trump suit: ♠
+Agent: player_1. Action: A♠
+---
+--- Agent turn #5.5 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #5.6 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #5.7 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #5.8 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #5.9 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #5.10 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #5.11 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #5.12 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #5.13 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #5.14 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #5.15 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #5.16 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #5.17 : player_0 ---
+player_0 => hand: ['A♦', '7♥', '7♣', '9♦', '9♣', '10♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♥', '6♦', '6♣', '10♠', 'Q♥'], attacker=True, terminated=False
+Cards on table: ['A♠'], Attacking card: A♠
+Discard: ['6♠', '9♠', 'K♦'], Deck: 19, Trump suit: ♠
+Agent: player_1. Action: 6♥
+---
+--- Agent turn #5.18 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #6.1 : player_0 ---
+player_0 => hand: ['A♦', '7♥', '7♣', '9♦', '9♣', '10♦', 'J♦', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '6♦', '6♣', '7♠', '10♠', 'Q♥'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠'], Deck: 18, Trump suit: ♠
+Agent: player_1. Action: Bita
+---
+--- Agent turn #6.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #6.3 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #6.4 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #6.5 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #6.6 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #6.7 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #6.8 : player_1 ---
+player_0 => hand: ['A♦', '7♥', '7♣', '9♦', '10♦', 'J♦', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '6♦', '6♣', '7♠', '10♠', 'Q♥'], attacker=False, terminated=False
+Cards on table: ['9♣'], Attacking card: 9♣
+Discard: ['6♠', '9♠', 'K♦', 'A♠'], Deck: 18, Trump suit: ♠
+Agent: player_0. Action: 9♣
+---
+--- Agent turn #6.9 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #6.10 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #6.11 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #6.12 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #6.13 : player_1 ---
+player_0 => hand: ['A♦', '7♥', '7♣', '9♦', '10♦', 'J♦', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '6♦', '6♣', '7♠', '10♠', 'Q♥'], attacker=False, terminated=False
+Cards on table: ['9♣'], Attacking card: 9♣
+Discard: ['6♠', '9♠', 'K♦', 'A♠'], Deck: 18, Trump suit: ♠
+Agent: player_0. Action: 7♥
+---
+--- Agent turn #7.1 : player_0 ---
+player_0 => hand: ['A♦', '7♥', '7♣', '9♦', '10♦', 'J♦', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '6♦', '6♣', '7♠', '9♣', '10♠', 'Q♥'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠'], Deck: 18, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #7.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #7.3 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #7.4 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #7.5 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #7.6 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #7.7 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #7.8 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #7.9 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #7.10 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #7.11 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #7.12 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #7.13 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #7.14 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #7.15 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #7.16 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #7.17 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #7.18 : player_1 ---
+player_0 => hand: ['A♦', '7♥', '7♣', '9♦', 'J♦', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '6♦', '6♣', '7♠', '9♣', '10♠', 'Q♥'], attacker=False, terminated=False
+Cards on table: ['10♦'], Attacking card: 10♦
+Discard: ['6♠', '9♠', 'K♦', 'A♠'], Deck: 18, Trump suit: ♠
+Agent: player_0. Action: 10♦
+---
+--- Agent turn #7.19 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #7.20 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #7.21 : player_1 ---
+player_0 => hand: ['A♦', '7♥', '7♣', '9♦', 'J♦', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '6♦', '6♣', '7♠', '9♣', '10♠', 'Q♥'], attacker=False, terminated=False
+Cards on table: ['10♦'], Attacking card: 10♦
+Discard: ['6♠', '9♠', 'K♦', 'A♠'], Deck: 18, Trump suit: ♠
+Agent: player_0. Action: 7♥
+---
+--- Agent turn #7.22 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #7.23 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #7.24 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #7.25 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #7.26 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #7.27 : player_1 ---
+player_0 => hand: ['A♦', '7♥', '7♣', '9♦', 'J♦', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '6♦', '6♣', '7♠', '9♣', '10♠', 'Q♥'], attacker=False, terminated=False
+Cards on table: ['10♦'], Attacking card: 10♦
+Discard: ['6♠', '9♠', 'K♦', 'A♠'], Deck: 18, Trump suit: ♠
+Agent: player_0. Action: 7♥
+---
+--- Agent turn #7.28 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #7.29 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #7.30 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #8.1 : player_1 ---
+player_0 => hand: ['A♦', '7♥', '7♣', '9♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♥', '6♦', '6♣', '7♠', '9♣', '10♠', 'Q♥'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦'], Deck: 18, Trump suit: ♠
+Agent: player_0. Action: Bita
+---
+--- Agent turn #8.2 : player_0 ---
+player_0 => hand: ['A♦', '7♥', '7♣', '9♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♦', '6♣', '7♠', '9♣', '10♠', 'Q♥'], attacker=True, terminated=False
+Cards on table: ['6♥'], Attacking card: 6♥
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦'], Deck: 18, Trump suit: ♠
+Agent: player_1. Action: 6♥
+---
+--- Agent turn #9.1 : player_0 ---
+player_0 => hand: ['6♥', 'A♦', '7♥', '7♣', '9♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♦', '6♣', '7♠', '9♣', '10♠', 'Q♥'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦'], Deck: 18, Trump suit: ♠
+Agent: player_0. Action: Take
+---
+--- Agent turn #9.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #9.3 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #9.4 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #9.5 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #9.6 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #9.7 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #9.8 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #9.9 : player_0 ---
+player_0 => hand: ['6♥', 'A♦', '7♥', '7♣', '9♦', 'J♦', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♣', '7♠', '9♣', '10♠', 'Q♥'], attacker=True, terminated=False
+Cards on table: ['6♦'], Attacking card: 6♦
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦'], Deck: 18, Trump suit: ♠
+Agent: player_1. Action: 6♦
+---
+--- Agent turn #9.10 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #9.11 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #10.1 : player_0 ---
+player_0 => hand: ['6♥', 'A♦', '7♥', '7♣', '9♦', 'J♦', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', 'A♣', '7♠', '9♣', '10♠', 'Q♥'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦'], Deck: 17, Trump suit: ♠
+Agent: player_1. Action: Bita
+---
+--- Agent turn #10.2 : player_1 ---
+player_0 => hand: ['6♥', 'A♦', '7♥', '7♣', '9♦', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', 'A♣', '7♠', '9♣', '10♠', 'Q♥'], attacker=False, terminated=False
+Cards on table: ['J♦'], Attacking card: J♦
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦'], Deck: 17, Trump suit: ♠
+Agent: player_0. Action: J♦
+---
+--- Agent turn #10.3 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #10.4 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #10.5 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #10.6 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #10.7 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #10.8 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #10.9 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #10.10 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #10.11 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #10.12 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #10.13 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #10.14 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #10.15 : player_1 ---
+player_0 => hand: ['6♥', 'A♦', '7♥', '7♣', '9♦', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', 'A♣', '7♠', '9♣', '10♠', 'Q♥'], attacker=False, terminated=False
+Cards on table: ['J♦'], Attacking card: J♦
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦'], Deck: 17, Trump suit: ♠
+Agent: player_0. Action: 7♥
+---
+hi
+--- Agent turn #10.16 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #10.17 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #10.18 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #10.19 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #10.20 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #10.21 : player_1 ---
+player_0 => hand: ['6♥', 'A♦', '7♥', '7♣', '9♦', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', 'A♣', '7♠', '9♣', '10♠', 'Q♥'], attacker=False, terminated=False
+Cards on table: ['J♦'], Attacking card: J♦
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦'], Deck: 17, Trump suit: ♠
+Agent: player_0. Action: 9♦
+---
+--- Agent turn #10.22 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #10.23 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #10.24 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #10.25 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #10.26 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #10.27 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #10.28 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #10.29 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #10.30 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #10.31 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #10.32 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #10.33 : player_1 ---
+player_0 => hand: ['6♥', 'A♦', '7♥', '7♣', '9♦', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', 'A♣', '7♠', '9♣', '10♠', 'Q♥'], attacker=False, terminated=False
+Cards on table: ['J♦'], Attacking card: J♦
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦'], Deck: 17, Trump suit: ♠
+Agent: player_0. Action: 7♣
+---
+--- Agent turn #11.1 : player_0 ---
+player_0 => hand: ['6♥', 'A♦', '7♥', '7♣', '9♦', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', 'A♣', '7♠', '9♣', '10♠', 'J♦', 'Q♥'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦'], Deck: 17, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #11.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #11.3 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #11.4 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #11.5 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #11.6 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #11.7 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #11.8 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #11.9 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #11.10 : player_1 ---
+player_0 => hand: ['6♥', '7♥', '7♣', '9♦', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', 'A♣', '7♠', '9♣', '10♠', 'J♦', 'Q♥'], attacker=False, terminated=False
+Cards on table: ['A♦'], Attacking card: A♦
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦'], Deck: 17, Trump suit: ♠
+Agent: player_0. Action: A♦
+---
+--- Agent turn #11.11 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #11.12 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #11.13 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #11.14 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #11.15 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #11.16 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #11.17 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #11.18 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #11.19 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #11.20 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #11.21 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #11.22 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #11.23 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #11.24 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #11.25 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #11.26 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #11.27 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #11.28 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #11.29 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #11.30 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #11.31 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #11.32 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #12.1 : player_1 ---
+player_0 => hand: ['6♥', '7♥', '7♣', '9♦', '10♥', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♣', 'A♣', '7♠', '9♣', '10♠', 'J♦', 'Q♥'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦'], Deck: 16, Trump suit: ♠
+Agent: player_0. Action: Bita
+---
+--- Agent turn #12.2 : player_0 ---
+player_0 => hand: ['6♥', '7♥', '7♣', '9♦', '10♥', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♣', '7♠', '9♣', '10♠', 'J♦', 'Q♥'], attacker=True, terminated=False
+Cards on table: ['A♣'], Attacking card: A♣
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦'], Deck: 16, Trump suit: ♠
+Agent: player_1. Action: A♣
+---
+--- Agent turn #12.3 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #12.4 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #12.5 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #12.6 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #12.7 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #12.8 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #12.9 : player_0 ---
+Invalid action: Agent: player_0
+hi
+--- Agent turn #12.10 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #12.11 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #12.12 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #13.1 : player_0 ---
+player_0 => hand: ['6♥', '7♥', '7♣', '9♦', '10♥', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', '7♠', '9♣', '10♠', 'J♦', 'Q♥'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣'], Deck: 16, Trump suit: ♠
+Agent: player_1. Action: Bita
+---
+--- Agent turn #13.2 : player_1 ---
+player_0 => hand: ['6♥', '7♣', '9♦', '10♥', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', '7♠', '9♣', '10♠', 'J♦', 'Q♥'], attacker=False, terminated=False
+Cards on table: ['7♥'], Attacking card: 7♥
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣'], Deck: 16, Trump suit: ♠
+Agent: player_0. Action: 7♥
+---
+--- Agent turn #13.3 : player_0 ---
+player_0 => hand: ['6♥', '7♣', '9♦', '10♥', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', '7♠', '9♣', 'J♦', 'Q♥'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠'], Deck: 16, Trump suit: ♠
+Agent: player_1. Action: 10♠
+---
+--- Agent turn #13.4 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #13.5 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #13.6 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #13.7 : player_0 ---
+Invalid action: Agent: player_0
+hi
+--- Agent turn #13.8 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #13.9 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #13.10 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #13.11 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #13.12 : player_1 ---
+player_0 => hand: ['7♣', '9♦', '10♥', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', '7♠', '9♣', 'J♦', 'Q♥'], attacker=False, terminated=False
+Cards on table: ['6♥'], Attacking card: 6♥
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠'], Deck: 16, Trump suit: ♠
+Agent: player_0. Action: 6♥
+---
+--- Agent turn #13.13 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #13.14 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #13.15 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #13.16 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #13.17 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #13.18 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #13.19 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #14.1 : player_0 ---
+player_0 => hand: ['7♣', '8♥', '9♦', '10♥', 'J♥', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', '6♥', '7♠', '9♣', 'J♦', 'Q♥'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠'], Deck: 14, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #14.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #14.3 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #14.4 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #14.5 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #14.6 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #14.7 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #15.1 : player_1 ---
+player_0 => hand: ['7♣', '8♥', '9♦', '10♥', 'J♥', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♣', '6♥', '7♠', '9♣', 'J♦', 'Q♥'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠'], Deck: 14, Trump suit: ♠
+Agent: player_0. Action: Bita
+---
+--- Agent turn #15.2 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #15.3 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #15.4 : player_0 ---
+player_0 => hand: ['7♣', '8♥', '9♦', '10♥', 'J♥', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♣', '6♥', '9♣', 'J♦', 'Q♥'], attacker=True, terminated=False
+Cards on table: ['7♠'], Attacking card: 7♠
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠'], Deck: 14, Trump suit: ♠
+Agent: player_1. Action: 7♠
+---
+--- Agent turn #15.5 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #15.6 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #15.7 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #15.8 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #15.9 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #15.10 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #15.11 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #15.12 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #15.13 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #15.14 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #15.15 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #15.16 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #16.1 : player_0 ---
+player_0 => hand: ['7♣', '8♥', '9♦', '10♥', 'J♥', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', '6♥', '9♣', 'J♦', 'Q♥', 'K♥'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠'], Deck: 13, Trump suit: ♠
+Agent: player_1. Action: Bita
+---
+--- Agent turn #16.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #16.3 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #16.4 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #16.5 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #16.6 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #16.7 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #16.8 : player_1 ---
+player_0 => hand: ['7♣', '8♥', '9♦', '10♥', 'J♥', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', '6♥', '9♣', 'J♦', 'Q♥', 'K♥'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠'], Deck: 13, Trump suit: ♠
+Agent: player_0. Action: Take
+---
+--- Agent turn #16.9 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #16.10 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #16.11 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #16.12 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #16.13 : player_0 ---
+Invalid action: Agent: player_0
+hi
+--- Agent turn #16.14 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #16.15 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #16.16 : player_1 ---
+player_0 => hand: ['7♣', '8♥', '9♦', 'J♥', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', '6♥', '9♣', 'J♦', 'Q♥', 'K♥'], attacker=False, terminated=False
+Cards on table: ['10♥'], Attacking card: 10♥
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠'], Deck: 13, Trump suit: ♠
+Agent: player_0. Action: 10♥
+---
+--- Agent turn #16.17 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #16.18 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #16.19 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #16.20 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #16.21 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #16.22 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #16.23 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #16.24 : player_0 ---
+player_0 => hand: ['7♣', '8♥', '9♦', 'J♥', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', '6♥', '9♣', 'J♦', 'Q♥'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥'], Deck: 13, Trump suit: ♠
+Agent: player_1. Action: K♥
+---
+--- Agent turn #17.1 : player_0 ---
+player_0 => hand: ['7♣', '8♥', '8♣', '9♦', 'J♥', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♣', '6♥', '8♠', '9♣', 'J♦', 'Q♥'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥'], Deck: 11, Trump suit: ♠
+Agent: player_0. Action: Bita
+---
+--- Agent turn #17.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.3 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.4 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.5 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.6 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.7 : player_0 ---
+player_0 => hand: ['7♣', '8♥', '8♣', '9♦', 'J♥', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♣', '6♥', '8♠', '9♣', 'Q♥'], attacker=True, terminated=False
+Cards on table: ['J♦'], Attacking card: J♦
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥'], Deck: 11, Trump suit: ♠
+Agent: player_1. Action: J♦
+---
+--- Agent turn #17.8 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.9 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.10 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.11 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.12 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.13 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.14 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.15 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.16 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.17 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.18 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.19 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.20 : player_0 ---
+player_0 => hand: ['7♣', '8♥', '8♣', '9♦', 'J♥', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♣', '6♥', '8♠', '9♣', 'Q♥'], attacker=True, terminated=False
+Cards on table: ['J♦'], Attacking card: J♦
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥'], Deck: 11, Trump suit: ♠
+Agent: player_1. Action: 6♣
+---
+--- Agent turn #17.21 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.22 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.23 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.24 : player_0 ---
+player_0 => hand: ['7♣', '8♥', '8♣', '9♦', 'J♥', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♣', '6♥', '8♠', '9♣', 'Q♥'], attacker=True, terminated=False
+Cards on table: ['J♦'], Attacking card: J♦
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥'], Deck: 11, Trump suit: ♠
+Agent: player_1. Action: 9♣
+---
+--- Agent turn #17.25 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.26 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.27 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.28 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.29 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.30 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.31 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.32 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.33 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.34 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.35 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.36 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.37 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.38 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.39 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.40 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.41 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.42 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.43 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.44 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.45 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.46 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.47 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.48 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.49 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.50 : player_0 ---
+player_0 => hand: ['7♣', '8♥', '8♣', '9♦', 'J♥', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♣', '6♥', '8♠', '9♣', 'Q♥'], attacker=True, terminated=False
+Cards on table: ['J♦'], Attacking card: J♦
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥'], Deck: 11, Trump suit: ♠
+Agent: player_1. Action: Q♥
+---
+--- Agent turn #17.51 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.52 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.53 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.54 : player_0 ---
+player_0 => hand: ['7♣', '8♥', '8♣', '9♦', 'J♥', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♣', '6♥', '8♠', '9♣', 'Q♥'], attacker=True, terminated=False
+Cards on table: ['J♦'], Attacking card: J♦
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥'], Deck: 11, Trump suit: ♠
+Agent: player_1. Action: Q♥
+---
+--- Agent turn #17.55 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.56 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #17.57 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #17.58 : player_0 ---
+Invalid action: Agent: player_0
+hi
+--- Agent turn #17.59 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #18.1 : player_0 ---
+player_0 => hand: ['7♣', '8♥', '8♣', '9♦', 'J♥', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', '6♥', '8♠', '9♣', 'Q♥', 'K♣'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦'], Deck: 10, Trump suit: ♠
+Agent: player_1. Action: Bita
+---
+--- Agent turn #18.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #18.3 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #18.4 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #18.5 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #18.6 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #18.7 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #18.8 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #18.9 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #18.10 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #18.11 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #18.12 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #18.13 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #18.14 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #18.15 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #18.16 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #18.17 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #18.18 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #18.19 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #18.20 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #18.21 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #18.22 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #18.23 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #18.24 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #18.25 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #18.26 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #19.1 : player_0 ---
+player_0 => hand: ['7♣', '8♥', '8♣', '9♦', 'J♥', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', '6♥', '8♠', '9♣', 'Q♥', 'K♣'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦'], Deck: 10, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #19.2 : player_1 ---
+player_0 => hand: ['7♣', '8♥', '9♦', 'J♥', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', '6♥', '8♠', '9♣', 'Q♥', 'K♣'], attacker=False, terminated=False
+Cards on table: ['8♣'], Attacking card: 8♣
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦'], Deck: 10, Trump suit: ♠
+Agent: player_0. Action: 8♣
+---
+--- Agent turn #19.3 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #19.4 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #19.5 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #19.6 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #19.7 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #19.8 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #19.9 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #19.10 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #19.11 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #19.12 : player_0 ---
+player_0 => hand: ['7♣', '8♥', '9♦', 'J♥', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', '6♥', '9♣', 'Q♥', 'K♣'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠'], Deck: 10, Trump suit: ♠
+Agent: player_1. Action: 8♠
+---
+--- Agent turn #19.13 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #20.1 : player_1 ---
+player_0 => hand: ['7♣', '8♥', '9♦', 'J♥', 'J♣', 'Q♠'], attacker=False, terminated=False
+player_1 => hand: ['6♣', '6♥', '9♣', 'J♠', 'Q♥', 'K♣'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠'], Deck: 8, Trump suit: ♠
+Agent: player_0. Action: Bita
+---
+--- Agent turn #20.2 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #20.3 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #20.4 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #20.5 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #20.6 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #20.7 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #20.8 : player_0 ---
+player_0 => hand: ['7♣', '8♥', '9♦', 'J♥', 'J♣', 'Q♠'], attacker=False, terminated=False
+player_1 => hand: ['6♣', '6♥', '9♣', 'J♠', 'Q♥', 'K♣'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠'], Deck: 8, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #20.9 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #20.10 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.1 : player_1 ---
+player_0 => hand: ['7♣', '8♥', '9♦', 'J♥', 'J♣', 'Q♠'], attacker=False, terminated=False
+player_1 => hand: ['6♣', '6♥', '9♣', 'J♠', 'Q♥', 'K♣'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠'], Deck: 8, Trump suit: ♠
+Agent: player_0. Action: Take
+---
+--- Agent turn #21.2 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.3 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.4 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.5 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.6 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.7 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.8 : player_0 ---
+player_0 => hand: ['7♣', '8♥', '9♦', 'J♥', 'J♣', 'Q♠'], attacker=False, terminated=False
+player_1 => hand: ['6♣', '6♥', '9♣', 'Q♥', 'K♣'], attacker=True, terminated=False
+Cards on table: ['J♠'], Attacking card: J♠
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠'], Deck: 8, Trump suit: ♠
+Agent: player_1. Action: J♠
+---
+--- Agent turn #21.9 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.10 : player_1 ---
+Invalid action: Agent: player_1
+hi
+--- Agent turn #21.11 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.12 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.13 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.14 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.15 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.16 : player_1 ---
+player_0 => hand: ['7♣', '8♥', '9♦', 'J♥', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♣', '6♥', '9♣', 'Q♥', 'K♣'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠'], Deck: 8, Trump suit: ♠
+Agent: player_0. Action: Q♠
+---
+--- Agent turn #21.17 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.18 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.19 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.20 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.21 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.22 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.23 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.24 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.25 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.26 : player_0 ---
+player_0 => hand: ['7♣', '8♥', '9♦', 'J♥', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♣', '6♥', '9♣', 'Q♥', 'K♣'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠'], Deck: 8, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #21.27 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.28 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.29 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.30 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.31 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.32 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.33 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.34 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.35 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.36 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.37 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.38 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.39 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.40 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.41 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.42 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.43 : player_1 ---
+Invalid action: Agent: player_1
+hi
+--- Agent turn #21.44 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.45 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.46 : player_0 ---
+player_0 => hand: ['7♣', '8♥', '9♦', 'J♥', 'J♣'], attacker=False, terminated=False
+player_1 => hand: ['6♣', '6♥', '9♣', 'Q♥'], attacker=True, terminated=False
+Cards on table: ['K♣'], Attacking card: K♣
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠'], Deck: 8, Trump suit: ♠
+Agent: player_1. Action: K♣
+---
+--- Agent turn #21.47 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.48 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.49 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.50 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.51 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.52 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.53 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.54 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.55 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.56 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.57 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.58 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.59 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.60 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.61 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.62 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.63 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.64 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.65 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.66 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.67 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.68 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.69 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.70 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.71 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.72 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.73 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.74 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.75 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.76 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.77 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.78 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.79 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.80 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.81 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.82 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.83 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.84 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.85 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.86 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.87 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.88 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.89 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.90 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.91 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.92 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.93 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.94 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.95 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.96 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #21.97 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #21.98 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.1 : player_0 ---
+player_0 => hand: ['7♣', '8♥', '9♦', '10♣', 'J♥', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', '6♥', '9♣', 'Q♥', 'Q♦', 'K♠'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣'], Deck: 5, Trump suit: ♠
+Agent: player_1. Action: Bita
+---
+--- Agent turn #22.2 : player_1 ---
+player_0 => hand: ['7♣', '8♥', '9♦', '10♣', 'J♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', '6♥', '9♣', 'Q♥', 'Q♦', 'K♠'], attacker=False, terminated=False
+Cards on table: ['J♥'], Attacking card: J♥
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣'], Deck: 5, Trump suit: ♠
+Agent: player_0. Action: J♥
+---
+--- Agent turn #22.3 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.4 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.5 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.6 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.7 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.8 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.9 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.10 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.11 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.12 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.13 : player_1 ---
+player_0 => hand: ['7♣', '8♥', '9♦', '10♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', '6♥', '9♣', 'Q♥', 'Q♦', 'K♠'], attacker=False, terminated=False
+Cards on table: ['J♥', 'J♣'], Attacking card: J♣
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣'], Deck: 5, Trump suit: ♠
+Agent: player_0. Action: J♣
+---
+--- Agent turn #22.14 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.15 : player_0 ---
+player_0 => hand: ['7♣', '8♥', '9♦', '10♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', '6♥', '9♣', 'Q♥', 'Q♦'], attacker=False, terminated=False
+Cards on table: ['J♥'], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠'], Deck: 5, Trump suit: ♠
+Agent: player_1. Action: K♠
+---
+--- Agent turn #22.16 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.17 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.18 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.19 : player_1 ---
+player_0 => hand: ['7♣', '8♥', '9♦', '10♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', '6♥', '9♣', 'Q♥', 'Q♦'], attacker=False, terminated=False
+Cards on table: ['J♥'], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠'], Deck: 5, Trump suit: ♠
+Agent: player_0. Action: 8♥
+---
+--- Agent turn #22.20 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.21 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.22 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.23 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.24 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.25 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.26 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.27 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.28 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.29 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.30 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.31 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.32 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.33 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.34 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.35 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.36 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.37 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.38 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.39 : player_1 ---
+player_0 => hand: ['7♣', '8♥', '9♦', '10♣'], attacker=True, terminated=False
+player_1 => hand: ['6♣', '6♥', '9♣', 'Q♥', 'Q♦'], attacker=False, terminated=False
+Cards on table: ['J♥'], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠'], Deck: 5, Trump suit: ♠
+Agent: player_0. Action: 10♣
+---
+--- Agent turn #22.40 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.41 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.42 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.43 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.44 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.45 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.46 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.47 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.48 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #22.49 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #22.50 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #23.1 : player_1 ---
+player_0 => hand: ['A♥', '7♣', '8♥', '9♦', '10♣', 'Q♣'], attacker=False, terminated=False
+player_1 => hand: ['6♣', '6♥', '7♦', '9♣', 'Q♥', 'Q♦'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥'], Deck: 2, Trump suit: ♠
+Agent: player_0. Action: Bita
+---
+--- Agent turn #23.2 : player_0 ---
+player_0 => hand: ['A♥', '7♣', '8♥', '9♦', '10♣', 'Q♣'], attacker=False, terminated=False
+player_1 => hand: ['6♥', '7♦', '9♣', 'Q♥', 'Q♦'], attacker=True, terminated=False
+Cards on table: ['6♣'], Attacking card: 6♣
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥'], Deck: 2, Trump suit: ♠
+Agent: player_1. Action: 6♣
+---
+--- Agent turn #23.3 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #23.4 : player_1 ---
+player_0 => hand: ['A♥', '7♣', '8♥', '9♦', '10♣'], attacker=False, terminated=False
+player_1 => hand: ['6♥', '7♦', '9♣', 'Q♥', 'Q♦'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣'], Deck: 2, Trump suit: ♠
+Agent: player_0. Action: Q♣
+---
+--- Agent turn #23.5 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #23.6 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #23.7 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #23.8 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #23.9 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #23.10 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #23.11 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #24.1 : player_0 ---
+player_0 => hand: ['A♥', '7♣', '8♥', '8♦', '9♦', '10♣'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '7♦', '9♥', '9♣', 'Q♥', 'Q♦'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣'], Deck: 0, Trump suit: ♠
+Agent: player_1. Action: Bita
+---
+--- Agent turn #24.2 : player_1 ---
+player_0 => hand: ['A♥', '7♣', '8♥', '8♦', '10♣'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '7♦', '9♥', '9♣', 'Q♥', 'Q♦'], attacker=False, terminated=False
+Cards on table: ['9♦'], Attacking card: 9♦
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣'], Deck: 0, Trump suit: ♠
+Agent: player_0. Action: 9♦
+---
+--- Agent turn #24.3 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #24.4 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #24.5 : player_1 ---
+player_0 => hand: ['A♥', '7♣', '8♥', '8♦', '10♣'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '7♦', '9♥', '9♣', 'Q♥', 'Q♦'], attacker=False, terminated=False
+Cards on table: ['9♦'], Attacking card: 9♦
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣'], Deck: 0, Trump suit: ♠
+Agent: player_0. Action: 7♣
+---
+--- Agent turn #24.6 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #24.7 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #24.8 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #24.9 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #24.10 : player_0 ---
+Invalid action: Agent: player_0
+hi
+--- Agent turn #24.11 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #24.12 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #24.13 : player_1 ---
+player_0 => hand: ['A♥', '7♣', '8♥', '8♦', '10♣'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '7♦', '9♥', '9♣', 'Q♥', 'Q♦'], attacker=False, terminated=False
+Cards on table: ['9♦'], Attacking card: 9♦
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣'], Deck: 0, Trump suit: ♠
+Agent: player_0. Action: 7♣
+---
+--- Agent turn #24.14 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #24.15 : player_1 ---
+player_0 => hand: ['A♥', '7♣', '8♥', '8♦', '10♣'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '7♦', '9♥', '9♣', 'Q♥', 'Q♦'], attacker=False, terminated=False
+Cards on table: ['9♦'], Attacking card: 9♦
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣'], Deck: 0, Trump suit: ♠
+Agent: player_0. Action: Take
+---
+--- Agent turn #24.16 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #24.17 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #24.18 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #24.19 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #24.20 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #24.21 : player_1 ---
+player_0 => hand: ['A♥', '7♣', '8♥', '8♦', '10♣'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '7♦', '9♥', '9♣', 'Q♥', 'Q♦'], attacker=False, terminated=False
+Cards on table: ['9♦'], Attacking card: 9♦
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣'], Deck: 0, Trump suit: ♠
+Agent: player_0. Action: 7♣
+---
+--- Agent turn #24.22 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #25.1 : player_1 ---
+player_0 => hand: ['A♥', '7♣', '8♥', '8♦', '10♣'], attacker=False, terminated=False
+player_1 => hand: ['6♥', '7♦', '9♥', '9♣', 'Q♥', 'Q♦'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦'], Deck: 0, Trump suit: ♠
+Agent: player_0. Action: Bita
+---
+--- Agent turn #25.2 : player_0 ---
+player_0 => hand: ['A♥', '7♣', '8♥', '8♦', '10♣'], attacker=False, terminated=False
+player_1 => hand: ['6♥', '9♥', '9♣', 'Q♥', 'Q♦'], attacker=True, terminated=False
+Cards on table: ['7♦'], Attacking card: 7♦
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦'], Deck: 0, Trump suit: ♠
+Agent: player_1. Action: 7♦
+---
+--- Agent turn #25.3 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #25.4 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #25.5 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #25.6 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #25.7 : player_0 ---
+player_0 => hand: ['A♥', '7♣', '8♥', '8♦', '10♣'], attacker=False, terminated=False
+player_1 => hand: ['6♥', '9♥', '9♣', 'Q♥', 'Q♦'], attacker=True, terminated=False
+Cards on table: ['7♦'], Attacking card: 7♦
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦'], Deck: 0, Trump suit: ♠
+Agent: player_1. Action: 9♥
+---
+--- Agent turn #25.8 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #25.9 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #25.10 : player_1 ---
+player_0 => hand: ['A♥', '7♣', '8♥', '10♣'], attacker=False, terminated=False
+player_1 => hand: ['6♥', '9♥', '9♣', 'Q♥', 'Q♦'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦'], Deck: 0, Trump suit: ♠
+Agent: player_0. Action: 8♦
+---
+--- Agent turn #25.11 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #25.12 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #25.13 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #25.14 : player_0 ---
+player_0 => hand: ['A♥', '7♣', '8♥', '10♣'], attacker=False, terminated=False
+player_1 => hand: ['6♥', '9♥', '9♣', 'Q♥', 'Q♦'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦'], Deck: 0, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #25.15 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #25.16 : player_0 ---
+player_0 => hand: ['A♥', '7♣', '8♥', '10♣'], attacker=False, terminated=False
+player_1 => hand: ['6♥', '9♥', '9♣', 'Q♥', 'Q♦'], attacker=True, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦'], Deck: 0, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #25.17 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #26.1 : player_0 ---
+player_0 => hand: ['A♥', '7♣', '8♥', '10♣'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '9♥', '9♣', 'Q♥', 'Q♦'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦'], Deck: 0, Trump suit: ♠
+Agent: player_1. Action: Bita
+---
+--- Agent turn #26.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #26.3 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #26.4 : player_1 ---
+player_0 => hand: ['A♥', '7♣', '8♥'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '9♥', '9♣', 'Q♥', 'Q♦'], attacker=False, terminated=False
+Cards on table: ['10♣'], Attacking card: 10♣
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦'], Deck: 0, Trump suit: ♠
+Agent: player_0. Action: 10♣
+---
+--- Agent turn #26.5 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #26.6 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #26.7 : player_1 ---
+Invalid action: Agent: player_1
+hi
+--- Agent turn #26.8 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #26.9 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #26.10 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #26.11 : player_1 ---
+player_0 => hand: ['A♥', '7♣', '8♥'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '9♥', '9♣', 'Q♥', 'Q♦'], attacker=False, terminated=False
+Cards on table: ['10♣'], Attacking card: 10♣
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦'], Deck: 0, Trump suit: ♠
+Agent: player_0. Action: A♥
+---
+--- Agent turn #26.12 : player_0 ---
+Invalid action: Agent: player_0
+hi
+--- Agent turn #26.13 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.1 : player_0 ---
+player_0 => hand: ['A♥', '7♣', '8♥'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '9♥', '9♣', '10♣', 'Q♥', 'Q♦'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦'], Deck: 0, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #27.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.3 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.4 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.5 : player_0 ---
+Invalid action: Agent: player_0
+hi
+--- Agent turn #27.6 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.7 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.8 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.9 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.10 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.11 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.12 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.13 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.14 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.15 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.16 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.17 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.18 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.19 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.20 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.21 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.22 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.23 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.24 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.25 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.26 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.27 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.28 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.29 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.30 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.31 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.32 : player_1 ---
+player_0 => hand: ['A♥', '7♣'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '9♥', '9♣', '10♣', 'Q♥', 'Q♦'], attacker=False, terminated=False
+Cards on table: ['8♥'], Attacking card: 8♥
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦'], Deck: 0, Trump suit: ♠
+Agent: player_0. Action: 8♥
+---
+--- Agent turn #27.33 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.34 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.35 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.36 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.37 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.38 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.39 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.40 : player_0 ---
+player_0 => hand: ['A♥', '7♣'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '9♥', '9♣', '10♣', 'Q♦'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦', '8♥', 'Q♥'], Deck: 0, Trump suit: ♠
+Agent: player_1. Action: Q♥
+---
+--- Agent turn #27.41 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.42 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.43 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.44 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.45 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.46 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.47 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.48 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.49 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.50 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #27.51 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #27.52 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #28.1 : player_0 ---
+player_0 => hand: ['A♥', '7♣'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '9♥', '9♣', '10♣', 'Q♦'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦', '8♥', 'Q♥'], Deck: 0, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #28.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #28.3 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #28.4 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #28.5 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #28.6 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #29.1 : player_0 ---
+player_0 => hand: ['A♥', '7♣'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '9♥', '9♣', '10♣', 'Q♦'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦', '8♥', 'Q♥'], Deck: 0, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #29.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #29.3 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #29.4 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #30.1 : player_0 ---
+player_0 => hand: ['A♥', '7♣'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '9♥', '9♣', '10♣', 'Q♦'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦', '8♥', 'Q♥'], Deck: 0, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #30.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #31.1 : player_0 ---
+player_0 => hand: ['A♥', '7♣'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '9♥', '9♣', '10♣', 'Q♦'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦', '8♥', 'Q♥'], Deck: 0, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #31.2 : player_1 ---
+player_0 => hand: ['A♥'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '9♥', '9♣', '10♣', 'Q♦'], attacker=False, terminated=False
+Cards on table: ['7♣'], Attacking card: 7♣
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦', '8♥', 'Q♥'], Deck: 0, Trump suit: ♠
+Agent: player_0. Action: 7♣
+---
+--- Agent turn #31.3 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #31.4 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #31.5 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #31.6 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #31.7 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #31.8 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #31.9 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #31.10 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #31.11 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #31.12 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #31.13 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #31.14 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #31.15 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #31.16 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #31.17 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #32.1 : player_0 ---
+player_0 => hand: ['A♥'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '7♣', '9♥', '9♣', '10♣', 'Q♦'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦', '8♥', 'Q♥'], Deck: 0, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #32.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #33.1 : player_0 ---
+player_0 => hand: ['A♥'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '7♣', '9♥', '9♣', '10♣', 'Q♦'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦', '8♥', 'Q♥'], Deck: 0, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #33.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #34.1 : player_0 ---
+player_0 => hand: ['A♥'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '7♣', '9♥', '9♣', '10♣', 'Q♦'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦', '8♥', 'Q♥'], Deck: 0, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #34.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #35.1 : player_0 ---
+player_0 => hand: ['A♥'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '7♣', '9♥', '9♣', '10♣', 'Q♦'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦', '8♥', 'Q♥'], Deck: 0, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #35.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #35.3 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #35.4 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #35.5 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #35.6 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #35.7 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #35.8 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #36.1 : player_0 ---
+player_0 => hand: ['A♥'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '7♣', '9♥', '9♣', '10♣', 'Q♦'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦', '8♥', 'Q♥'], Deck: 0, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #36.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #36.3 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #36.4 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #36.5 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #36.6 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #36.7 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #36.8 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #36.9 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #36.10 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #36.11 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #36.12 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #36.13 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #36.14 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #36.15 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #36.16 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #36.17 : player_0 ---
+Invalid action: Agent: player_0
+hi
+--- Agent turn #36.18 : player_1 ---
+Invalid action: Agent: player_1
+hi
+--- Agent turn #36.19 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #36.20 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #36.21 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #36.22 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #36.23 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #36.24 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #36.25 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #36.26 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #36.27 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #36.28 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #36.29 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #36.30 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #36.31 : player_0 ---
+Invalid action: Agent: player_0
+hi
+--- Agent turn #36.32 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #37.1 : player_0 ---
+player_0 => hand: ['A♥'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '7♣', '9♥', '9♣', '10♣', 'Q♦'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦', '8♥', 'Q♥'], Deck: 0, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #37.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #38.1 : player_0 ---
+player_0 => hand: ['A♥'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '7♣', '9♥', '9♣', '10♣', 'Q♦'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦', '8♥', 'Q♥'], Deck: 0, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #38.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #38.3 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #38.4 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #38.5 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #38.6 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #38.7 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #38.8 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #38.9 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #38.10 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #38.11 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #38.12 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #38.13 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #38.14 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #38.15 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #38.16 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #38.17 : player_0 ---
+Invalid action: Agent: player_0
+hi
+--- Agent turn #38.18 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #38.19 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #38.20 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #38.21 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #38.22 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #38.23 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #38.24 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #38.25 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #38.26 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #38.27 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #38.28 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.1 : player_0 ---
+player_0 => hand: ['A♥'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '7♣', '9♥', '9♣', '10♣', 'Q♦'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦', '8♥', 'Q♥'], Deck: 0, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #39.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.3 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.4 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.5 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.6 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.7 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.8 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.9 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.10 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.11 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.12 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.13 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.14 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.15 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.16 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.17 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.18 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.19 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.20 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.21 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.22 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.23 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.24 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.25 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.26 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.27 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.28 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.29 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.30 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.31 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.32 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.33 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.34 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.35 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.36 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.37 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.38 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.39 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.40 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.41 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.42 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.43 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.44 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.45 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.46 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.47 : player_0 ---
+Invalid action: Agent: player_0
+hi
+--- Agent turn #39.48 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.49 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.50 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.51 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.52 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.53 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.54 : player_1 ---
+player_0 => hand: ['A♥'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '7♣', '9♥', '9♣', '10♣', 'Q♦'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦', '8♥', 'Q♥'], Deck: 0, Trump suit: ♠
+Agent: player_0. Action: Take
+---
+--- Agent turn #39.55 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.56 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.57 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.58 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.59 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.60 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.61 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.62 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.63 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.64 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.65 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.66 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #39.67 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #39.68 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.1 : player_0 ---
+player_0 => hand: ['A♥'], attacker=True, terminated=False
+player_1 => hand: ['6♥', '7♣', '9♥', '9♣', '10♣', 'Q♦'], attacker=False, terminated=False
+Cards on table: [], Attacking card: No
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦', '8♥', 'Q♥'], Deck: 0, Trump suit: ♠
+Agent: player_1. Action: Take
+---
+--- Agent turn #40.2 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.3 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.4 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.5 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.6 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.7 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.8 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.9 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.10 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.11 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.12 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.13 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.14 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.15 : player_0 ---
+Invalid action: Agent: player_0
+hi
+--- Agent turn #40.16 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.17 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.18 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.19 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.20 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.21 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.22 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.23 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.24 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.25 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.26 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.27 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.28 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.29 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.30 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.31 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.32 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.33 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.34 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.35 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.36 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.37 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.38 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.39 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.40 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.41 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.42 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.43 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.44 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.45 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.46 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.47 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.48 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.49 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.50 : player_1 ---
+Invalid action: Agent: player_1
+--- Agent turn #40.51 : player_0 ---
+Invalid action: Agent: player_0
+--- Agent turn #40.52 : player_1 ---
+player_0 => hand: [], attacker=True, terminated=True
+player_1 => hand: ['6♥', '7♣', '9♥', '9♣', '10♣', 'Q♦'], attacker=False, terminated=True
+Cards on table: ['A♥'], Attacking card: A♥
+Discard: ['6♠', '9♠', 'K♦', 'A♠', '10♦', '6♦', 'A♦', 'A♣', '7♥', '10♠', '7♠', '10♥', 'K♥', 'J♦', '8♣', '8♠', 'J♠', 'Q♠', 'K♣', 'J♣', 'K♠', 'J♥', '6♣', 'Q♣', '9♦', '7♦', '8♦', '8♥', 'Q♥'], Deck: 0, Trump suit: ♠
+Agent: player_0. Action: A♥
+---
+Training finished.
