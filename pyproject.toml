@@ -7,6 +7,7 @@ requires-python = ">=3.12"
 dependencies = [
     "nbqa>=1.9.1",
     "pettingzoo>=1.24.3",
+    "pytest>=8.3.4",
     "tqdm>=4.67.1",
 ]
 
@@ -171,6 +172,7 @@ select = [
     "FURB",   # refurb
     "DOC",    # pydoclint
     "RUF",    # Ruff-specific rules
+    "S101"
 ]
 task-tags = ["HACK", "TODO", "FIXME", "XXX"]
 
@@ -231,10 +233,6 @@ multiline-quotes = "double"
 [tool.ruff.lint.flake8-self]
 extend-ignore-names = ["Base"]
 ignore-names = ["_new"]
-
-[tool.ruff.lint.flake8-tidy-imports]
-ban-relative-imports = "all"
-banned-module-level-imports = ["torch", "tensorflow"]
 
 [tool.ruff.lint.flake8-type-checking]
 exempt-modules = ["typing", "typing_extensions"]
