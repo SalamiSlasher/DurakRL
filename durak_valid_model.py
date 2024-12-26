@@ -39,9 +39,9 @@ def valid_actions(env: DurakAEC, agent: str) -> list[int]:
             for c in hand:
                 if is_rank_in_play(c, env.cards_on_table):
                     va.append(c)
-        # "бито" (37) для атакующего
-        va.append(37)
-        # "взять" (36) обычно не имеет смысла для атакующего => не добавляем
+            va.append(37)
+            # "бито" (37) для атакующего
+            # "взять" (36) обычно не имеет смысла для атакующего => не добавляем
     else:
         # Защитник
         if attacking_card is not None:
@@ -393,4 +393,4 @@ def train_dqn(
 
 if __name__ == '__main__':
     env = DurakAEC()
-    train_dqn(env, num_episodes=2000)
+    train_dqn(env, num_episodes=2000, checkpoint_interval=100)
