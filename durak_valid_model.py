@@ -1,18 +1,24 @@
 from __future__ import annotations
 
+from collections import deque
+from collections import namedtuple
+
 import random
-from collections import deque, namedtuple
-from typing import NamedTuple
+
+from tqdm import tqdm
+
 import numpy as np
 import torch
 import torch.nn as nn
-import torch.optim as optim
 import torch.nn.functional as F
-from tqdm import tqdm
+import torch.optim as optim
 
 # Импортируем вашу среду DurakAEC,
 # а также вспомогательные функции card_can_beat, is_rank_in_play
-from durak_env import DurakAEC, DurakObservation, card_can_beat, is_rank_in_play
+from durak_env import DurakAEC
+from durak_env import DurakObservation
+from durak_env import card_can_beat
+from durak_env import is_rank_in_play
 
 # ========== 1. valid_actions ==========
 
@@ -327,15 +333,16 @@ def train_dqn(
                 )
 
                 if action[0] is None:
-                    continue
-
-                action = torch.argmax(action).item()
+                    observations = env.observe(agent)
+                    action = 37 if observations['is_attacker'] else 36
+                else:
+                    action = torch.argmax(action).item()
                 state_old = obs[agent].copy()
                 env.step(action)
 
                 r = env.rewards[agent]
                 total_reward += r
-                done_flag = env.terminations[agent] or env.truncations[agent]
+                done_flag = any(env.terminations) or any(env.truncations)
 
                 obs[agent] = flatten_observation(env.observe(agent))
 
@@ -347,7 +354,7 @@ def train_dqn(
                 # Оптимизация
                 optimize_model()
 
-            env.render()
+            # env.render()
 
             if all(
                 env.terminations[a] or env.truncations[a] for a in env.agents
