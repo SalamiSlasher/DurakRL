@@ -326,29 +326,26 @@ def train_dqn(
                     temperature=temperature,
                 )
 
+                if action[0] is None:
+                    continue
+
                 action = torch.argmax(action).item()
+                state_old = obs[agent].copy()
+                env.step(action)
 
-                if action is None:
-                    env.step(None)
-                else:
-                    state_old = obs[agent].copy()
-                    env.step(action)
+                r = env.rewards[agent]
+                total_reward += r
+                done_flag = env.terminations[agent] or env.truncations[agent]
 
-                    r = env.rewards[agent]
-                    total_reward += r
-                    done_flag = (
-                        env.terminations[agent] or env.truncations[agent]
-                    )
+                obs[agent] = flatten_observation(env.observe(agent))
 
-                    obs[agent] = flatten_observation(env.observe(agent))
+                # Сохраняем переход
+                replay_buffer.push(
+                    state_old, action, r, obs[agent], float(done_flag)
+                )
 
-                    # Сохраняем переход
-                    replay_buffer.push(
-                        state_old, action, r, obs[agent], float(done_flag)
-                    )
-
-                    # Оптимизация
-                    optimize_model()
+                # Оптимизация
+                optimize_model()
 
             env.render()
 
