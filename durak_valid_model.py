@@ -325,8 +325,15 @@ def train_dqn(
                     device,
                     temperature=temperature,
                 )
-
+                if action is None:
+                    continue  # means player won
                 action = torch.argmax(action).item()
+
+                # try:
+                #     action = torch.argmax(action).item()
+                # except TypeError:
+                #     print(action)
+                #     print(type(action))
 
                 if action is None:
                     env.step(None)
