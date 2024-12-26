@@ -55,7 +55,7 @@ def pretty_card(card_id: int | None) -> str:
 
 
 def card_can_beat(
-    *, defend_card: int, trump_suit: int, attacking_card: int
+    defend_card: int, trump_suit: int, attacking_card: int
 ) -> bool:
     """Check if defend_card can beat attack_card with this trump_suit."""
     attack_rank = get_rank(attacking_card)

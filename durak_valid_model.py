@@ -10,71 +10,47 @@ import torch.optim as optim
 import torch.nn.functional as F
 from tqdm import tqdm
 
-# Импортируем вашу среду.
-# Предполагается, что внутри durak_env.py определены:
-# class DurakAEC, функции card_can_beat, is_rank_in_play, etc.
+# Импортируем вашу среду DurakAEC,
+# а также вспомогательные функции card_can_beat, is_rank_in_play
 from durak_env import DurakAEC, DurakObservation, card_can_beat, is_rank_in_play
-
 
 # ========== 1. valid_actions ==========
 
 
 def valid_actions(env: DurakAEC, agent: str) -> list[int]:
     """
-    Возвращает список допустимых (валидных) действий для данного агента:
-    - Если агент терминальный, возвращаем [].
-    - Если это атакующий:
-        * можно сыграть любую карту из руки (0..35),
-          если стол пуст или ранг этой карты уже есть на столе (is_rank_in_play).
-        * можно "бито" (37).
-        * не включаем "взять" (36) для атакующего,
-          потому что в DurakAEC он обычно игнорируется (нет смысла).
-    - Если это защитник:
-        * можно сыграть карту, которая бьёт attacking_card,
-        * можно "взять" (36),
-        * обычно "бито" (37) для защитника не разрешено,
-          но если у вас в step(...) разрешено — добавьте.
+    Возвращает список допустимых (валидных) действий для данного агента.
+    Логика соответствует вашему DurakAEC.step(...).
     """
     if env.terminations[agent] or env.truncations[agent]:
         return []
 
-    hand = env.hands[agent]  # множество карт (int) в руке
+    hand = env.hands[agent]  # множество карт в руке
     is_attacker = env.is_attacker[agent]
     attacking_card = env.attacking_card
 
     va = []
     if is_attacker:
-        # можно подкинуть любую карту, которая
-        #  если стол пуст, нет ограничения
-        #  если на столе что-то лежит, проверяем is_rank_in_play
+        # если стол пуст => любые карты из руки
+        # иначе => только те, чей rank есть на столе
         if len(env.cards_on_table) == 0:
-            # стол пуст => любые карты из руки
             va.extend(list(hand))
         else:
-            # стол не пуст => только карты, у которых rank есть на столе
             for c in hand:
                 if is_rank_in_play(c, env.cards_on_table):
                     va.append(c)
-
         # "бито" (37) для атакующего
         va.append(37)
-        # "взять" (36) мы не добавляем, т.к. по логике DurakAEC step игнорирует
+        # "взять" (36) обычно не имеет смысла для атакующего => не добавляем
     else:
         # Защитник
         if attacking_card is not None:
-            # можно сыграть любую карту из руки, которая бьёт attacking_card
             for c in hand:
-                if card_can_beat(
-                    defend_card=c,
-                    trump_suit=env.trump_suit,
-                    attacking_card=attacking_card,
-                ):
+                if card_can_beat(c, env.trump_suit, attacking_card):
                     va.append(c)
-        # можно "взять" (36)
+        # "взять" (36) всегда разрешено защитнику
         va.append(36)
-        # "бито" (37) для защитника в вашем коде DurakAEC обычно "Invalid",
-        # так что не добавляем. Если хотите разрешить — добавьте va.append(37).
-
+        # "бито" (37) в вашем DurakAEC обычно неразрешено защитнику => не добавляем
     return va
 
 
@@ -95,12 +71,10 @@ class ReplayBuffer:
         self.buffer = deque(maxlen=capacity)
 
     def push(self, *args):
-        # args => (state, action, reward, next_state, done)
         self.buffer.append(Transition(*args))
 
     def sample(self, batch_size: int):
         batch = random.sample(self.buffer, batch_size)
-        # Массово превращаем в numpy
         arr_states = np.array([t.state for t in batch], dtype=np.float32)
         arr_next_states = np.array(
             [t.next_state for t in batch], dtype=np.float32
@@ -109,7 +83,6 @@ class ReplayBuffer:
         rewards = np.array([t.reward for t in batch], dtype=np.float32)
         dones = np.array([t.done for t in batch], dtype=np.float32)
 
-        # Теперь в тензоры
         states = torch.from_numpy(arr_states)
         next_states = torch.from_numpy(arr_next_states)
         actions = torch.from_numpy(actions)
@@ -121,12 +94,12 @@ class ReplayBuffer:
         return len(self.buffer)
 
 
-# ========== 3. Сеть DQN ==========
+# ========== 3. Сеть ==========
 
 
 class DQNNetwork(nn.Module):
     """
-    Пример fully-connected DQN, использующий LayerNorm + SELU.
+    Fully-connected сеть (Q-сеть).
     """
 
     def __init__(self, state_dim: int, action_dim: int) -> None:
@@ -148,12 +121,12 @@ class DQNNetwork(nn.Module):
         return self.net(x)
 
 
-# ========== 4. Функция flatten_observation ==========
+# ========== 4. flatten_observation ==========
 
 
 def flatten_observation(obs_dict: DurakObservation) -> np.ndarray:
     """
-    Сжимаем Dict-наблюдение в плоский numpy-вектор (размер 113).
+    Превращаем Dict-наблюдение DurakObservation в вектор float32 размера [113].
     """
     hand = np.array(obs_dict['hand'] + [0] * (36 - len(obs_dict['hand'])))[:36]
     table = np.array(
@@ -176,6 +149,7 @@ def flatten_observation(obs_dict: DurakObservation) -> np.ndarray:
         ],
         dtype=np.int32,
     )
+
     return np.concatenate([
         hand,
         table,
@@ -185,66 +159,72 @@ def flatten_observation(obs_dict: DurakObservation) -> np.ndarray:
         opp_cards_count,
         deck_count,
         attacking_card,
-    ])
+    ]).astype(np.float32)
 
 
-# ========== 5. Выбор действия с маской ==========
+# ========== 5. Softmax-эксперимент ==========
 
 
-def masked_select_action(
+def masked_select_action_softmax(
     policy_net: DQNNetwork,
     env: DurakAEC,
     agent: str,
     obs_state: np.ndarray,
-    epsilon: float,
     action_dim: int,
     device: torch.device,
-) -> int | None:
+    temperature: float = 1.0,
+) -> tuple[int | None, float]:
     """
-    Выбор действия с учётом valid_actions.
+    1) Смотрим valid_actions(env, agent).
+    2) Получаем логиты = Q(s,a) для всех a=0..action_dim-1.
+    3) Ставим -1e9 для невалидных.
+    4) Применяем Softmax(logits / temperature).
+    5) Сэмплим действие из полученного распределения.
+    6) Возвращаем (chosen_action, probability_of_chosen_action).
 
-    - Если random.random() < epsilon => берём **случайное** действие
-      из valid_actions.
-    - Иначе => считаем Q для всех действий [0..action_dim-1],
-      зануляем/занижаем Q для невалидных, берём argmax.
-
-    Если вообще нет valid_actions => возвращаем None (пропуск хода).
+    Если valid_actions пуст, возвращаем (None, 0.0).
     """
-
-    va = valid_actions(env, agent)  # список допустимых действий
+    va = valid_actions(env, agent)
     if not va:
-        return None  # нет ходов => сделаем step(None)
+        return None, 0.0
 
-    # Если eps => случайное разрешённое действие
-    if random.random() < epsilon:
-        return random.choice(va)
-    else:
-        # Вычисляем Q(s, a) для всех a
-        state_t = torch.tensor(
-            obs_state, dtype=torch.float32, device=device
-        ).unsqueeze(0)
-        # Отключаем BatchNorm/LN обновление статистик (eval mode),
-        # хотя LayerNorm менее критичен, всё же на 1 выборке не проблема.
-        was_training = policy_net.training
-        policy_net.eval()
-        with torch.no_grad():
-            q_values = policy_net(state_t)  # shape=[1, action_dim]
-        if was_training:
-            policy_net.train()
+    # получаем Q
+    state_t = torch.tensor(
+        obs_state, dtype=torch.float32, device=device
+    ).unsqueeze(0)
+    was_training = policy_net.training
+    policy_net.eval()
+    with torch.no_grad():
+        q_values = policy_net(state_t)  # shape=[1, action_dim]
+    if was_training:
+        policy_net.train()
 
-        q_values = q_values.squeeze(0).cpu().numpy()  # shape=[action_dim]
+    # убираем batch-измерение
+    q_values = q_values.squeeze(0)  # shape=[action_dim]
 
-        # Маскируем: для недопустимых действий ставим -1e9
-        masked_q = np.full(action_dim, -1e9, dtype=np.float32)
-        for a in va:
-            masked_q[a] = q_values[a]
+    # маскируем
+    big_neg = -1e9
+    masked_logits = torch.full(
+        (action_dim,), fill_value=big_neg, dtype=torch.float32, device=device
+    )
+    for a in va:
+        masked_logits[a] = q_values[a]
 
-        # Выбираем argmax
-        best_action = int(np.argmax(masked_q))
-        return best_action
+    # Превращаем логиты в распределение (Softmax).
+    # Можно добавить деление на temperature, чтобы управлять «остротой» распределения.
+    dist = torch.distributions.Categorical(logits=masked_logits / temperature)
+
+    # Сэмплим действие
+    action_tensor = dist.sample()  # это int-тензор
+    action_int = action_tensor.item()
+
+    # Вероятность выбранного действия
+    action_prob = dist.probs[action_tensor].item()
+
+    return action_int, action_prob
 
 
-# ========== 6. Основной цикл обучения ==========
+# ========== 6. Цикл обучения с softmax-политикой ==========
 
 
 def train_dqn(
@@ -254,25 +234,31 @@ def train_dqn(
     batch_size: int = 64,
     gamma: float = 0.99,
     lr: float = 1e-3,
-    epsilon_start: float = 1.0,
-    epsilon_end: float = 0.01,
-    epsilon_decay: float = 0.999,
+    temperature: float = 1.0,
+    temperature_decay: float = 0.999,
+    temperature_min: float = 0.1,
     target_update_interval: int = 50,
     checkpoint_interval: int = 500,
     save_path: str = 'durak_dqn_final.pth',
 ) -> None:
+    """
+    Пример обучения, где при выборе действия
+    мы используем softmax по Q, а не eps-greedy.
+
+    temperature отвечает за «расплывчатость» softmax.
+    Медленно уменьшаем её до temperature_min.
+    """
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print('Training on device:', device)
 
-    # ----- 6.1 Создаём буфер и сеть -----
+    # 6.1: Инициализация
     replay_buffer = ReplayBuffer(capacity=buffer_capacity)
 
-    # Выясняем размеры
     env.reset()
-    env.start()  # первая раздача
+    env.start()
     action_dim = env.action_spaces[env.agents[0]].n  # 38
-    tmp_obs = flatten_observation(env.observe(env.agents[0]))
-    state_dim = tmp_obs.shape[0]  # 113
+    sample_obs = flatten_observation(env.observe(env.agents[0]))
+    state_dim = sample_obs.shape[0]  # 113
 
     policy_net = DQNNetwork(state_dim, action_dim).to(device)
     target_net = DQNNetwork(state_dim, action_dim).to(device)
@@ -281,11 +267,10 @@ def train_dqn(
 
     optimizer = optim.Adam(policy_net.parameters(), lr=lr)
 
-    epsilon = epsilon_start
     episode_rewards = []
     wins_in_last_100 = 0
 
-    # ----- 6.2 Функция оптимизации -----
+    # функция оптимизации
     def optimize_model():
         if len(replay_buffer) < batch_size:
             return
@@ -294,31 +279,29 @@ def train_dqn(
         )
 
         states = states.to(device)
-        actions = actions.to(device).unsqueeze(1)  # (batch,1)
+        actions = actions.to(device).unsqueeze(1)
         rewards = rewards.to(device).unsqueeze(1)
         next_states = next_states.to(device)
         dones = dones.to(device).unsqueeze(1)
 
         # Q(s,a)
-        q_values = policy_net(states).gather(1, actions)
+        q_current = policy_net(states).gather(1, actions)
 
-        # max Q(s', a') из target_net
         with torch.no_grad():
-            max_next_q = target_net(next_states).max(dim=1, keepdim=True)[0]
-            target_q = rewards + (1 - dones) * gamma * max_next_q
+            q_next_max = target_net(next_states).max(dim=1, keepdim=True)[0]
+            q_target = rewards + (1 - dones) * gamma * q_next_max
 
-        loss = F.mse_loss(q_values, target_q)
+        loss = F.mse_loss(q_current, q_target)
         optimizer.zero_grad()
         loss.backward()
         nn.utils.clip_grad_norm_(policy_net.parameters(), 5.0)
         optimizer.step()
 
-    # ----- 6.3 Запуск эпизодов -----
+    # 6.2: Основной цикл эпизодов
     for episode in tqdm(range(num_episodes)):
         env.reset()
         env.start()
 
-        # Собираем начальные obs
         obs = {}
         for ag in env.agents:
             obs[ag] = flatten_observation(env.observe(ag))
@@ -330,85 +313,80 @@ def train_dqn(
             agent = env.agent_selection
 
             if env.terminations[agent] or env.truncations[agent]:
-                # агент уже выбыл, пропускаем
                 env.step(None)
             else:
-                # Выбираем действие с учётом валидных
-                action = masked_select_action(
+                # Выбираем действие через softmax
+                action, act_prob = masked_select_action_softmax(
                     policy_net,
                     env,
                     agent,
                     obs[agent],
-                    epsilon,
                     action_dim,
                     device,
+                    temperature=temperature,
                 )
+
                 if action is None:
-                    # нет валидных ходов => step(None)
                     env.step(None)
                 else:
                     state_old = obs[agent].copy()
                     env.step(action)
 
-                    reward = env.rewards[agent]
-                    total_reward += reward
+                    r = env.rewards[agent]
+                    total_reward += r
                     done_flag = (
                         env.terminations[agent] or env.truncations[agent]
                     )
 
-                    # Новое наблюдение
                     obs[agent] = flatten_observation(env.observe(agent))
 
-                    # Сохраняем в буфер
+                    # Сохраняем переход
                     replay_buffer.push(
-                        state_old, action, reward, obs[agent], float(done_flag)
+                        state_old, action, r, obs[agent], float(done_flag)
                     )
-                    # Обновляем политику
+
+                    # Оптимизация
                     optimize_model()
 
-            # Проверяем глобальное завершение
             if all(
                 env.terminations[a] or env.truncations[a] for a in env.agents
             ):
                 done = True
 
-        # Эпизод закончен
+        # итоги эпизода
         episode_rewards.append(total_reward)
-
-        # Считаем, что если reward у player_0 > 0 => победа player_0
         if env.rewards['player_0'] > 0:
             wins_in_last_100 += 1
 
-        # Апдейтим target
+        # обновляем target
         if (episode + 1) % target_update_interval == 0:
             target_net.load_state_dict(policy_net.state_dict())
 
-        # Каждые 100 эпизодов печатаем статистику
+        # статистика
         if (episode + 1) % 100 == 0:
-            avg_reward = np.mean(episode_rewards[-100:])
+            avg_r = np.mean(episode_rewards[-100:])
             winrate_100 = wins_in_last_100 / 100
             print(
-                f'[Ep {episode + 1}] AvgReward(last100)={avg_reward:.2f}, '
-                f'WinRate(last100)={winrate_100:.2f}, Eps={epsilon:.3f}'
+                f'[Ep {episode + 1}] AvgR={avg_r:.2f}, WinRate_100={winrate_100:.2f}, T={temperature:.3f}'
             )
             wins_in_last_100 = 0
 
-        # Сохраняем checkpoint
+        # checkpoint
         if (episode + 1) % checkpoint_interval == 0:
-            checkpoint_path = f'durak_dqn_checkpoint_{episode + 1}.pth'
-            torch.save(policy_net.state_dict(), checkpoint_path)
-            print(f'... checkpoint saved to {checkpoint_path}')
+            ckpt_path = f'durak_dqn_ckpt_{episode + 1}.pth'
+            torch.save(policy_net.state_dict(), ckpt_path)
+            print(f'Saved checkpoint to {ckpt_path}')
 
-        # Декремент eps
-        epsilon = max(epsilon_end, epsilon_decay * epsilon)
+        # плавно уменьшаем temperature
+        temperature = max(temperature_min, temperature_decay * temperature)
 
-    # Сохраняем финальную модель
+    # финальная модель
     torch.save(policy_net.state_dict(), save_path)
-    print(f'Training finished. Model weights saved to {save_path}')
+    print(f'Done. Model saved to {save_path}')
 
 
 # ========== 7. Пример запуска ==========
 
 if __name__ == '__main__':
     env = DurakAEC()
-    train_dqn(env, num_episodes=5000)
+    train_dqn(env, num_episodes=2000)
