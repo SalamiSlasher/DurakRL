@@ -221,7 +221,7 @@ def masked_select_action_softmax(
     # Вероятность выбранного действия
     action_prob = dist.probs[action_tensor].item()
 
-    return action_int, action_prob
+    return dist.logits
 
 
 # ========== 6. Цикл обучения с softmax-политикой ==========
@@ -316,7 +316,7 @@ def train_dqn(
                 env.step(None)
             else:
                 # Выбираем действие через softmax
-                action, act_prob = masked_select_action_softmax(
+                action = masked_select_action_softmax(
                     policy_net,
                     env,
                     agent,
@@ -325,6 +325,8 @@ def train_dqn(
                     device,
                     temperature=temperature,
                 )
+
+                action = torch.argmax(action).item()
 
                 if action is None:
                     env.step(None)
@@ -347,6 +349,8 @@ def train_dqn(
 
                     # Оптимизация
                     optimize_model()
+
+            env.render()
 
             if all(
                 env.terminations[a] or env.truncations[a] for a in env.agents

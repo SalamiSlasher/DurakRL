@@ -201,9 +201,12 @@ def play_match(
                 # действие противника
                 if opponent_type == 'model':
                     action = model_action(policy_net, env, agent, device)
+                    pass
+
                 elif opponent_type == 'random':
                     action = random_action(env, agent)
-                    pass
+                    while action not in valid_actions(env, agent):
+                        action = model_action(policy_net, env, agent, device)
                 else:  # 'greedy'
                     action = greedy_action(env, agent)
 
@@ -229,7 +232,7 @@ def evaluate_agent(n_episodes=100, opponent_type='model', render=True):
     # Загрузите вашу обученную сеть
     policy_net = DQNNetwork(state_dim=113, action_dim=38).to(device)
     policy_net.load_state_dict(
-        torch.load('durak_dqn_checkpoint_1500.pth', map_location=device)
+        torch.load('durak_dqn_ckpt_500.pth', map_location=device)
     )
     policy_net.eval()
 
@@ -245,13 +248,13 @@ def evaluate_agent(n_episodes=100, opponent_type='model', render=True):
 
 if __name__ == '__main__':
     # 1) self-play
-    # print('=== EVALUATE: SELF-PLAY ===')
-    # evaluate_agent(n_episodes=100, opponent_type='model', render=True)
+    print('=== EVALUATE: SELF-PLAY ===')
+    evaluate_agent(n_episodes=100, opponent_type='model', render=True)
 
     # 2) random opponent
-    print('=== EVALUATE: VS RANDOM ===')
-    evaluate_agent(n_episodes=100, opponent_type='random', render=True)
+    # print('=== EVALUATE: VS RANDOM ===')
+    # evaluate_agent(n_episodes=100, opponent_type='random', render=True)
 
     # 3) greedy opponent
-    print('=== EVALUATE: VS GREEDY ===')
-    evaluate_agent(n_episodes=100, opponent_type='greedy', render=True)
+    # print('=== EVALUATE: VS GREEDY ===')
+    # evaluate_agent(n_episodes=100, opponent_type='greedy', render=True)
